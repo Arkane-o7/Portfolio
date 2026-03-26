@@ -16,6 +16,7 @@
                     fontFamily: {
                         sans: ['"Instrument Sans"', 'sans-serif'],
                         serif: ['"Instrument Serif"', 'serif'],
+                        hand: ['"Caveat"', 'cursive'],
                     }
                 }
             }
@@ -25,7 +26,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
         html { scroll-behavior: smooth; }
@@ -36,8 +37,9 @@
                 linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%), 
                 linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.04));
             background-size: 100% 4px, 3px 100%;
-            box-shadow: inset 0 0 120px rgba(0,0,0,0.95);
             animation: scanlines 10s linear infinite;
+            -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
         }
         @keyframes scanlines {
             0% { background-position: 0 0, 0 0; }
@@ -45,27 +47,25 @@
         }
     </style>
 </head>
-<body class="min-h-screen bg-[#000000] text-white font-sans relative selection:bg-[#FF1F1F] selection:text-white">
+<body class="min-h-screen bg-[#000000] text-white font-sans relative selection:bg-[#C83030] selection:text-white">
 
     <!-- Navigation -->
     <nav class="fixed bottom-8 left-8 md:bottom-12 md:left-12 z-50 flex flex-col items-start gap-1" id="nav-menu">
-        <button data-target="home" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#FF1F1F] font-medium border-b border-[#FF1F1F]">Home</button>
-        <button data-target="about" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Who am I?</button>
-        <button data-target="works" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Works</button>
-        <button data-target="journey" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Journey</button>
-        <button data-target="connect" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Connect</button>
-        <a href="blogs.html" class="text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Blogs</a>
-        <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Resume ↗</a>
+        <a href="/" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#C83030] font-medium border-b border-[#C83030]">Home</a>
+        <a href="/#about" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent" data-target="about">About me</a>
+        <a href="/#works" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent" data-target="works">Projects</a>
+        <a href="blogs.html" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Blogs</a>
+        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Resume ↗</a>
     </nav>
 
     <!-- MAIN CONTENT WRAPPER -->
-    <main class="pb-32">
+    <main>
         
         <!-- HERO SECTION -->
         <section id="home" class="relative min-h-screen flex flex-col justify-center px-8 md:px-12 pt-32 pb-16 overflow-hidden">
             
             <!-- Ascii Galaxy Background -->
-            <div class="absolute inset-0 z-0 overflow-hidden bg-[#020305]" id="canvas-container">
+            <div class="absolute inset-0 z-0 overflow-hidden" style="background: linear-gradient(to bottom, #000000 0%, #00001c 100%);" id="canvas-container">
                 <div class="crt-overlay absolute inset-0 z-10 pointer-events-none"></div>
                 <canvas 
                     id="galaxyCanvas"
@@ -74,22 +74,22 @@
                 ></canvas>
             </div>
 
-            <!-- Future Video Placeholder (Bottom Right) -->
+            <!-- Image (Bottom Right) -->
             <!-- z-[5] layers it above the background canvas (z-0) but below the text (z-10) -->
             <img 
-                src="https://placehold.co/1920x1080/1A1E26/BDBDBD?text=Transparent+Video+Placeholder" 
-                alt="Video Placeholder" 
-                class="absolute bottom-0 right-0 w-3/4 h-auto z-[5] pointer-events-none opacity-60"
+                src="/assets/DF49E32F-A3AB-4B5F-8C65-874A6BAD811F_4_5005_c-removebg-preview-BtjuuodE.png" 
+                alt="Abhilaksh Chauhan" 
+                class="absolute bottom-0 right-0 w-full md:w-[100%] lg:w-[95%] max-w-[1200px] h-auto z-[5] pointer-events-none opacity-100"
             >
 
             <!-- Foreground Content -->
             <div class="relative z-10 pointer-events-none">
-                <p class="text-[#FF1F1F] font-sans text-base md:text-lg mb-4 font-medium tracking-wide pointer-events-auto w-max">
+                <p class="text-[#C83030] font-sans text-lg md:text-xl mb-4 font-medium tracking-wide pointer-events-auto w-max">
                     Hey there! im
                 </p>
                 
                 <div class="relative inline-block w-max max-w-full pointer-events-auto">
-                    <h1 class="font-serif text-[3rem] leading-[0.95] sm:text-[4rem] md:text-[5.5rem] lg:text-[7rem] tracking-tight text-[#FFFFFF]">
+                    <h1 class="font-serif text-[4rem] leading-[0.95] sm:text-[5rem] md:text-[6.5rem] lg:text-[8rem] tracking-tight text-[#FFFFFF]">
                         Abhilaksh<br>Chauhan
                     </h1>
                     
@@ -104,55 +104,275 @@
                     </div>
                 </div>
 
-                <p class="text-[#BDBDBD] font-sans mt-8 md:mt-12 text-sm md:text-base font-light pl-2 pointer-events-auto w-max">
+                <p class="text-[#BDBDBD] font-sans mt-8 md:mt-12 text-base md:text-lg font-light pl-2 pointer-events-auto w-max">
                     Software Engg.
                 </p>
             </div>
         </section>
 
         <!-- SECTIONS -->
-        <div class="pl-8 pr-8 md:pl-64 lg:pl-80 relative z-10 bg-[#000000]">
+        <div class="pl-8 pr-8 md:pl-64 lg:pl-80 relative z-10 bg-[#00001c]">
             
-            <section id="about" class="min-h-screen py-24 border-t border-[#4A4A4A]/30">
-                <h2 class="font-serif text-5xl md:text-7xl mb-12">Who am I?</h2>
-                <p class="text-[#BDBDBD] text-xl max-w-2xl leading-relaxed">
-                    [A brief introduction about yourself goes here. We can pull in the text from the separate about page if you prefer to keep it all on the home page!]
-                </p>
+            <section id="about" class="min-h-screen pt-48 md:pt-64 pb-24 flex flex-col justify-center">
+                <div class="flex flex-col xl:flex-row gap-16 xl:items-center justify-between">
+                    <!-- Text Side -->
+                    <div class="flex-1 w-full max-w-2xl xl:max-w-none">
+                        <h2 class="font-serif text-5xl md:text-7xl mb-12">Who am I?</h2>
+                        <div class="text-[#BDBDBD] text-xl leading-relaxed space-y-6 xl:pr-12">
+                            <p>
+                                Hey, I’m Abhilaksh Chauhan a 2nd year student at VIT Vellore studying CS. I love building stuff that lives on the internet, from simple interactive web experiences to robust, scalable backend systems.
+                            </p>
+                            
+                        </div>
+                    </div>
+
+                    <!-- Polaroids Grid Side -->
+                    <div class="w-full max-w-[480px] grid grid-cols-2 gap-6 relative mt-12 xl:mt-4 p-4 shrink-0 xl:mr-32 2xl:mr-48">
+                        <!-- Polaroid 1 -->
+                        <div class="bg-[#f6f6f6] p-3 pb-8 sm:p-4 sm:pb-14 shadow-[0_15px_30px_rgba(0,0,0,0.8)] transform -rotate-6 hover:rotate-0 hover:scale-[1.15] hover:z-50 transition-all duration-300 z-10 translate-y-4 flex flex-col">
+                            <div class="aspect-square bg-gray-800 w-full overflow-hidden">
+                                <!-- Replace src with your image -->
+                                <img src="" alt="" class="w-full h-full object-cover">
+                            </div>
+                            <div class="mt-4 text-center">
+                                <span class="font-hand text-2xl text-[#1a1a1a] opacity-80 decoration-slice">Coffee runs!</span>
+                            </div>
+                        </div>
+                        <!-- Polaroid 2 -->
+                        <div class="bg-[#f6f6f6] p-3 pb-8 sm:p-4 sm:pb-14 shadow-[0_15px_30px_rgba(0,0,0,0.8)] transform rotate-4 hover:rotate-0 hover:scale-[1.15] hover:z-50 transition-all duration-300 z-20 translate-y-16 flex flex-col">
+                            <div class="aspect-square bg-gray-700 w-full overflow-hidden">
+                                <!-- Replace src with your image -->
+                                <img src="" alt="" class="w-full h-full object-cover">
+                            </div>
+                            <div class="mt-4 text-center">
+                                <span class="font-hand text-2xl text-[#1a1a1a] opacity-80 decoration-slice">Hackathon '25</span>
+                            </div>
+                        </div>
+                        <!-- Polaroid 3 -->
+                        <div class="bg-[#f6f6f6] p-3 pb-8 sm:p-4 sm:pb-14 shadow-[0_15px_30px_rgba(0,0,0,0.8)] transform -rotate-2 hover:rotate-0 hover:scale-[1.15] hover:z-50 transition-all duration-300 z-30 -translate-y-4 flex flex-col">
+                            <div class="aspect-square bg-gray-600 w-full overflow-hidden">
+                                <!-- Replace src with your image -->
+                                <img src="" alt="" class="w-full h-full object-cover">
+                            </div>
+                            <div class="mt-4 text-center">
+                                <span class="font-hand text-2xl text-[#1a1a1a] opacity-80 decoration-slice">VIT sunset</span>
+                            </div>
+                        </div>
+                        <!-- Polaroid 4 -->
+                        <div class="bg-[#f6f6f6] p-3 pb-8 sm:p-4 sm:pb-14 shadow-[0_15px_30px_rgba(0,0,0,0.8)] transform rotate-6 hover:rotate-0 hover:scale-[1.15] hover:z-50 transition-all duration-300 z-40 translate-y-6 flex flex-col">
+                            <div class="aspect-square bg-gray-900 w-full overflow-hidden">
+                                <!-- Replace src with your image -->
+                                <img src="" alt="" class="w-full h-full object-cover">
+                            </div>
+                            <div class="mt-4 text-center">
+                                <span class="font-hand text-2xl text-[#1a1a1a] opacity-80 decoration-slice">Code & sleep</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
 
-            <section id="works" class="min-h-screen py-24 border-t border-[#4A4A4A]/30">
-                <h2 class="font-serif text-5xl md:text-7xl mb-12">Stuff I have worked on.</h2>
-                <p class="text-[#BDBDBD] text-xl max-w-2xl leading-relaxed">
-                    [Projects and stuff you have worked on goes here. We can use cool grid layouts or lists.]
-                </p>
+            <section id="works" class="pt-48 md:pt-64 pb-24 relative">
+                <div class="flex flex-col lg:flex-row gap-16 items-start">
+                    <!-- Left Sticky Heading -->
+                    <div class="lg:w-1/3 lg:sticky lg:top-48 shrink-0 relative z-10">
+                        <h2 class="font-serif text-5xl md:text-7xl mb-6 leading-tight">Stuff I have <br><span class="italic text-[#C83030]">worked on.</span></h2>
+                        <p class="text-[#BDBDBD] text-xl leading-relaxed max-w-sm">
+                            A curated selection of my projects, experiments, and technical deep dives. Scroll to explore!
+                        </p>
+                    </div>
+
+                    <!-- Right Scrolling Project Cards -->
+                    <div class="lg:w-2/3 flex flex-col gap-16 lg:gap-32 w-full mt-12 lg:mt-0 pr-4 sm:pr-8 md:pr-12 lg:pr-24 xl:pr-40 2xl:pr-56">
+                        
+                        <!-- Project Card 1 -->
+                        <div class="group relative block w-full outline-none transition-transform duration-500 hover:scale-[1.02]">
+                            <div class="relative w-full aspect-[16/9] bg-[#11112b] rounded-[2rem] overflow-hidden border border-[#4A4A4A]/20 mb-8 shadow-2xl transition-all duration-700">
+                                <!-- Placeholder Image Area -->
+                                <div class="absolute inset-0 bg-gradient-to-br from-[#0a0a1a] to-[#00001c] opacity-80 backdrop-blur-sm flex items-center justify-center font-mono text-[#4A4A4A]">IMAGE REF</div>
+                            </div>
+                            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 px-2">
+                                <div>
+                                    <h3 class="font-sans text-3xl md:text-4xl text-white mb-3 tracking-tight group-hover:text-[#C83030] transition-colors duration-300">Project Alpha</h3>
+                                    <p class="text-[#BDBDBD] text-lg max-w-xl">A complete overhaul of a legacy backend system, increasing throughput by 400% using Rust and Redis.</p>
+                                    <div class="flex flex-wrap gap-3 mt-6">
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Rust</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Redis</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">System Design</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="inline-flex shrink-0 items-center justify-center w-14 h-14 rounded-full bg-[#11112b] border border-[#4A4A4A]/30 text-white group-hover:bg-[#C83030] group-hover:border-[#C83030] transition-all duration-300">
+                                    <span class="text-2xl transform -rotate-45">→</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Project Card 2 -->
+                        <div class="group relative block w-full outline-none transition-transform duration-500 hover:scale-[1.02]">
+                            <div class="relative w-full aspect-[16/9] bg-[#11112b] rounded-[2rem] overflow-hidden border border-[#4A4A4A]/20 mb-8 shadow-2xl transition-all duration-700">
+                                <!-- Placeholder Image Area -->
+                                <div class="absolute inset-0 bg-gradient-to-tl from-[#0a0a1a] to-[#00001c] opacity-80 backdrop-blur-sm flex items-center justify-center font-mono text-[#4A4A4A]">IMAGE REF</div>
+                            </div>
+                            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 px-2">
+                                <div>
+                                    <h3 class="font-sans text-3xl md:text-4xl text-white mb-3 tracking-tight group-hover:text-[#C83030] transition-colors duration-300">E-Commerce Platform</h3>
+                                    <p class="text-[#BDBDBD] text-lg max-w-xl">A highly scalable headless commerce solution combining Next.js with a custom Node.js microservices architecture.</p>
+                                    <div class="flex flex-wrap gap-3 mt-6">
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Next.js</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Node.js</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">PostgreSQL</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="inline-flex shrink-0 items-center justify-center w-14 h-14 rounded-full bg-[#11112b] border border-[#4A4A4A]/30 text-white group-hover:bg-[#C83030] group-hover:border-[#C83030] transition-all duration-300">
+                                    <span class="text-2xl transform -rotate-45">→</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Project Card 3 -->
+                        <div class="group relative block w-full outline-none transition-transform duration-500 hover:scale-[1.02]">
+                            <div class="relative w-full aspect-[16/9] bg-[#11112b] rounded-[2rem] overflow-hidden border border-[#4A4A4A]/20 mb-8 shadow-2xl transition-all duration-700">
+                                <!-- Placeholder Image Area -->
+                                <div class="absolute inset-0 bg-gradient-to-tr from-[#0a0a1a] to-[#00001c] opacity-80 backdrop-blur-sm flex items-center justify-center font-mono text-[#4A4A4A]">IMAGE REF</div>
+                            </div>
+                            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 px-2">
+                                <div>
+                                    <h3 class="font-sans text-3xl md:text-4xl text-white mb-3 tracking-tight group-hover:text-[#C83030] transition-colors duration-300">Interactive WebGL App</h3>
+                                    <p class="text-[#BDBDBD] text-lg max-w-xl">An immersive data visualization tool built directly in browser using Three.js and raw WebGL shaders.</p>
+                                    <div class="flex flex-wrap gap-3 mt-6">
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Three.js</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">WebGL</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">GLSL</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="inline-flex shrink-0 items-center justify-center w-14 h-14 rounded-full bg-[#11112b] border border-[#4A4A4A]/30 text-white group-hover:bg-[#C83030] group-hover:border-[#C83030] transition-all duration-300">
+                                    <span class="text-2xl transform -rotate-45">→</span>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </section>
 
-            <section id="journey" class="min-h-screen py-24 border-t border-[#4A4A4A]/30">
-                <h2 class="font-serif text-5xl md:text-7xl mb-12">Journey so far.</h2>
-                <p class="text-[#BDBDBD] text-xl max-w-2xl leading-relaxed">
-                    [Timeline of internships, jobs, and experience goes here.]
-                </p>
-            </section>
-
-            <section id="connect" class="min-h-[80vh] pt-24 pb-8 border-t border-[#4A4A4A]/30 flex flex-col justify-between">
-                <div>
-                    <h2 class="font-serif text-5xl md:text-7xl mb-12">Connect.</h2>
-                    <p class="text-[#BDBDBD] text-xl max-w-2xl leading-relaxed mb-8">
-                        [Email, GitHub, LinkedIn, Twitter/X.]
+            <section id="journey" class="mt-48 pb-48 md:pb-64 relative">
+                
+                <!-- Sticky Heading & Fade Mask -->
+                <div class="sticky top-0 z-30 pt-16 md:pt-24 pb-8 bg-[#00001c]">
+                    <h2 class="font-serif text-5xl md:text-7xl mb-6 leading-tight">Journey<br><span class="italic text-[#C83030]">so far.</span></h2>
+                    <p class="text-[#BDBDBD] text-xl leading-relaxed max-w-sm">
+                        A timeline of my education, experiences, and milestones.
                     </p>
-                    <a href="mailto:hello@example.com" class="inline-block text-2xl border-b-2 border-[#FF1F1F] text-white hover:text-[#FF1F1F] transition-colors pb-1">
-                        Send an email ↗
-                    </a>
+                    <!-- Gradient blur to hide elements gracefully as they scroll up into the heading -->
+                    <div class="absolute bottom-[-3rem] left-0 right-0 h-12 bg-gradient-to-b from-[#00001c] to-transparent pointer-events-none"></div>
+                </div>
+
+                <!-- Timeline (Single Column Layout Below) -->
+                <div class="flex flex-col w-full mt-16 pl-2 lg:pl-8 max-w-4xl relative z-10 pr-4">
+                    <div class="relative border-l border-[#4A4A4A]/30 ml-3 md:ml-4 pb-16">
+                        
+                        <!-- Timeline Item 1 (Active) -->
+                        <div class="mb-20 relative pl-10 md:pl-16 group">
+                            <!-- Marker -->
+                            <div class="absolute left-[-5.5px] top-2 w-3 h-3 bg-[#C83030] rounded-full shadow-[0_0_15px_rgba(200,48,48,0.8)] transition-transform duration-300 group-hover:scale-150"></div>
+                            
+                            <div class="mb-2 text-[#4A4A4A] font-mono text-sm tracking-widest group-hover:text-[#C83030]/70 transition-colors duration-300">2024 - PRESENT</div>
+                            <h3 class="font-sans text-2xl md:text-4xl text-white mb-2 tracking-tight group-hover:text-[#C83030] transition-colors duration-300">Computer Science, B.Tech</h3>
+                            <h4 class="text-white opacity-80 text-lg mb-4 font-medium">VIT Vellore</h4>
+                            <p class="text-[#BDBDBD] text-lg max-w-2xl leading-relaxed">
+                                Currently in my 2nd year. Deep diving into backend systems, scalable architectures, and active participation in multiple technical clubs.
+                            </p>
+                        </div>
+
+                        <!-- Timeline Item 2 -->
+                        <div class="mb-20 relative pl-10 md:pl-16 group">
+                            <!-- Marker -->
+                            <div class="absolute left-[-4.5px] top-2 w-[10px] h-[10px] bg-[#00001c] border-2 border-[#4A4A4A] rounded-full transition-all duration-300 group-hover:border-[#C83030] group-hover:bg-[#C83030] group-hover:scale-125 group-hover:shadow-[0_0_10px_rgba(200,48,48,0.5)]"></div>
+                            
+                            <div class="mb-2 text-[#4A4A4A] font-mono text-sm tracking-widest group-hover:text-white/70 transition-colors duration-300">SUMMER 2023</div>
+                            <h3 class="font-sans text-2xl md:text-3xl text-white mb-2 tracking-tight group-hover:text-white transition-colors duration-300">Software Engineering Intern</h3>
+                            <h4 class="text-white opacity-80 text-lg mb-4 font-medium">Tech Startup Inc.</h4>
+                            <p class="text-[#BDBDBD] text-lg max-w-2xl leading-relaxed">
+                                Built and maintained internal dashboards using React. Designed a set of Node.js microservices that improved data processing speed by 40%.
+                            </p>
+                        </div>
+
+                        <!-- Timeline Item 3 -->
+                        <div class="mb-20 relative pl-10 md:pl-16 group">
+                            <!-- Marker -->
+                            <div class="absolute left-[-4.5px] top-2 w-[10px] h-[10px] bg-[#00001c] border-2 border-[#4A4A4A] rounded-full transition-all duration-300 group-hover:border-[#C83030] group-hover:bg-[#C83030] group-hover:scale-125 group-hover:shadow-[0_0_10px_rgba(200,48,48,0.5)]"></div>
+                            
+                            <div class="mb-2 text-[#4A4A4A] font-mono text-sm tracking-widest group-hover:text-white/70 transition-colors duration-300">WINTER 2022</div>
+                            <h3 class="font-sans text-2xl md:text-3xl text-white mb-2 tracking-tight group-hover:text-white transition-colors duration-300">Open Source Contributor</h3>
+                            <h4 class="text-white opacity-80 text-lg mb-4 font-medium">Various Organizations</h4>
+                            <p class="text-[#BDBDBD] text-lg max-w-2xl leading-relaxed">
+                                Contributed to several tools and libraries. Learned the importance of clear documentation, CI/CD pipelines, and writing robust tests.
+                            </p>
+                        </div>
+
+                        <!-- Timeline Item 4 -->
+                        <div class="mb-8 relative pl-10 md:pl-16 group">
+                            <!-- Marker -->
+                            <div class="absolute left-[-4.5px] top-2 w-[10px] h-[10px] bg-[#00001c] border-2 border-[#4A4A4A] rounded-full transition-all duration-300 group-hover:border-[#C83030] group-hover:bg-[#C83030] group-hover:scale-125 group-hover:shadow-[0_0_10px_rgba(200,48,48,0.5)]"></div>
+                            
+                            <div class="mb-2 text-[#4A4A4A] font-mono text-sm tracking-widest group-hover:text-white/70 transition-colors duration-300">EARLY 2022</div>
+                            <h3 class="font-sans text-2xl md:text-3xl text-white mb-2 tracking-tight group-hover:text-white transition-colors duration-300">First Lines of Code</h3>
+                            <h4 class="text-white opacity-80 text-lg mb-4 font-medium">Self-Taught</h4>
+                            <p class="text-[#BDBDBD] text-lg max-w-2xl leading-relaxed">
+                                Started my journey writing simple Python automation scripts. Eventually transitioned into full-stack web development and fell in love with building products.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section id="connect" class="pl-8 pr-8 md:pl-64 lg:pl-80 relative z-10 min-h-[80vh] pt-24 pb-8 flex flex-col justify-between" style="background: linear-gradient(to bottom, #00001c 0%, #000000 100%);">
+            <div>
+                <h2 class="font-serif text-5xl sm:text-7xl md:text-[6rem] mb-12 tracking-tight">Let's build<br><span class="text-[#C83030] italic">something.</span></h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 mt-16 max-w-4xl">
+                        <div class="flex flex-col gap-6">
+                            <h3 class="text-[#4A4A4A] text-sm font-mono uppercase tracking-widest mb-2">Socials</h3>
+                            <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="group text-3xl md:text-4xl hover:text-[#C83030] transition-colors w-max flex items-center gap-4">
+                                <svg class="w-8 h-8 md:w-10 md:h-10 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.113.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+                                GitHub <span class="text-xl md:text-2xl transition-transform group-hover:translate-x-2 group-hover:-translate-y-2 opacity-0 group-hover:opacity-100">↗</span>
+                            </a>
+                            <a href="https://linkedin.com/in/" target="_blank" rel="noopener noreferrer" class="group text-3xl md:text-4xl hover:text-[#C83030] transition-colors w-max flex items-center gap-4">
+                                <svg class="w-8 h-8 md:w-10 md:h-10 fill-current" viewBox="0 0 24 24"><path d="M22.23 0H1.77C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.77 24h20.46c.978 0 1.77-.773 1.77-1.729V1.729C24 .774 23.208 0 22.23 0zM7.12 20.452H3.56V9h3.56v11.452zM5.34 7.434c-1.14 0-2.06-.92-2.06-2.06 0-1.14.92-2.06 2.06-2.06s2.06.92 2.06 2.06c0 1.14-.92 2.06-2.06 2.06zm15.116 13.018h-3.558v-5.568c0-1.328-.024-3.036-1.852-3.036-1.85 0-2.134 1.444-2.134 2.94v5.664H9.362V9h3.414v1.566h.048c.476-.9 1.636-1.85 3.37-1.85 3.606 0 4.266 2.372 4.266 5.454v6.282z"/></svg>
+                                LinkedIn <span class="text-xl md:text-2xl transition-transform group-hover:translate-x-2 group-hover:-translate-y-2 opacity-0 group-hover:opacity-100">↗</span>
+                            </a>
+                            <a href="https://x.com/" target="_blank" rel="noopener noreferrer" class="group text-3xl md:text-4xl hover:text-[#C83030] transition-colors w-max flex items-center gap-4">
+                                <svg class="w-8 h-8 md:w-10 md:h-10 fill-current" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+                                Twitter / X <span class="text-xl md:text-2xl transition-transform group-hover:translate-x-2 group-hover:-translate-y-2 opacity-0 group-hover:opacity-100">↗</span>
+                            </a>
+                        </div>
+                        
+                        <div class="flex flex-col gap-6">
+                            <h3 class="text-[#4A4A4A] text-sm font-mono uppercase tracking-widest mb-2">Drop a line</h3>
+                            <a href="mailto:hello@abhilaksh.com" class="group text-2xl sm:text-3xl md:text-4xl hover:text-[#C83030] transition-colors w-max flex items-center gap-4">
+                                <svg class="w-8 h-8 md:w-10 md:h-10 fill-current" viewBox="0 0 24 24"><path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" /><path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" /></svg>
+                                hello@abhilaksh.com <span class="text-xl md:text-2xl transition-transform group-hover:translate-x-2 group-hover:-translate-y-2 opacity-0 group-hover:opacity-100">↗</span>
+                            </a>
+                            
+                            <p class="text-[#BDBDBD] text-lg mt-2 max-w-sm leading-relaxed">
+                                Currently open for new opportunities, collaborations, and interesting projects.
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Footer -->
-                <footer class="mt-32 pt-8 border-t border-[#4A4A4A]/30 text-[#4A4A4A] flex flex-col md:flex-row justify-between items-center text-xs md:text-sm font-mono tracking-widest uppercase">
+                <footer class="mt-32 pt-8 text-[#4A4A4A] flex flex-col md:flex-row justify-between items-start md:items-center text-xs md:text-sm font-mono tracking-widest uppercase">
                     <p>© 2026 Abhilaksh Chauhan</p>
-                    <p class="mt-4 md:mt-0">Built with <span class="text-[#FF1F1F]">♥</span></p>
+                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="mt-4 md:mt-0 inline-flex shrink-0 items-center justify-center w-14 h-14 rounded-full bg-[#11112b] border border-[#4A4A4A]/30 text-white hover:bg-[#C83030] hover:border-[#C83030] hover:shadow-[0_0_20px_rgba(200,48,48,0.4)] transition-all duration-300 focus:outline-none cursor-pointer" aria-label="Back to top">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
+                        </svg>
+                    </button>
                 </footer>
             </section>
-
-        </div>
 
     </main>
 
@@ -178,7 +398,7 @@
 
                 navBtns.forEach(btn => {
                     if (btn.dataset.target === activeId) {
-                        btn.className = 'nav-btn text-lg md:text-xl transition-all duration-300 text-[#FF1F1F] font-medium border-b border-[#FF1F1F]';
+                        btn.className = 'nav-btn text-lg md:text-xl transition-all duration-300 text-[#C83030] font-medium border-b border-[#C83030]';
                     } else {
                         btn.className = 'nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent';
                     }
@@ -202,7 +422,7 @@
             // --- Ascii Galaxy Canvas Logic ---
             const canvas = document.getElementById('galaxyCanvas');
             if (!canvas) return;
-            const ctx = canvas.getContext('2d', { alpha: false });
+            const ctx = canvas.getContext('2d');
 
             const NUM_PARTICLES = 65000; 
             const CHARS = "  .·-~*:;=!+#$@"; 
@@ -221,11 +441,11 @@
             let particles = [];
             
             let spin = 0;
-            let targetPitch = 0.5; let pitch = 0.5; 
-            let targetYaw = 0;   let yaw = 0;
-            let targetZoom = 14; let zoom = 14; 
+            let targetPitch = 0.7939; let pitch = 0.7939; 
+            let targetYaw = 0.6930;   let yaw = 0.6930;
+            let targetZoom = 4.0;     let zoom = 100.0; // Zoom starts far away and dives in!
             
-            let autoDrift = true;
+            let autoDrift = false; // Disabling auto-drift initially to let the user appreciate the fixed zooming angle
             let time = 0;
 
             let isDragging = false;
@@ -316,8 +536,8 @@
                 spin -= 0.0015;
 
                 if (autoDrift) {
-                    targetYaw = Math.sin(time * 0.3) * 0.15;
-                    targetPitch = 0.45 + Math.cos(time * 0.2) * 0.1;
+                    targetYaw = 0.6930 + Math.sin(time * 0.3) * 0.15;
+                    targetPitch = 0.7939 + Math.cos(time * 0.2) * 0.1;
                 }
 
                 yaw += (targetYaw - yaw) * 0.08;
@@ -355,7 +575,8 @@
                     fz += zoom;
                     if (fz < 0.1) continue;
 
-                    let depthWeight = 12 / fz;
+                    // Adding a small base value (0.2) so far away stars don't disappear completely
+                    let depthWeight = (12 / fz) + 0.2;
                     depthWeight *= 0.8 + 0.4 * Math.sin(time * 5 + i); 
 
                     let scale = perspective / fz;
@@ -374,17 +595,19 @@
                     }
                 }
 
-                ctx.fillStyle = '#020305'; 
-                ctx.fillRect(0, 0, width, height);
+                // 1) Clear canvas so the CSS background gradient underneath shines through purely
+                ctx.clearRect(0, 0, width, height);
 
+                // 2) Radial Glow (drawn purely on transparent background)
                 const centerX = width / 2;
                 const centerY = height / 2;
                 const glowRadius = Math.max(width, height) * 0.45;
-                let gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, glowRadius);
-                gradient.addColorStop(0, 'rgba(45, 50, 59, 0.15)');
-                gradient.addColorStop(0.5, 'rgba(26, 30, 38, 0.1)');
-                gradient.addColorStop(1, 'transparent');
-                ctx.fillStyle = gradient;
+                let glowGradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, glowRadius);
+                glowGradient.addColorStop(0, 'rgba(45, 50, 59, 0.15)');
+                glowGradient.addColorStop(0.5, 'rgba(26, 30, 38, 0.1)');
+                glowGradient.addColorStop(1, 'transparent');
+                ctx.globalCompositeOperation = 'source-over';
+                ctx.fillStyle = glowGradient;
                 ctx.fillRect(0, 0, width, height);
 
                 ctx.globalCompositeOperation = 'lighter';
@@ -469,8 +692,9 @@
             };
 
             const handleWheel = (e) => {
-                targetZoom += e.deltaY * 0.01;
-                targetZoom = Math.max(4, Math.min(targetZoom, 35)); 
+                // Zoom is locked
+                // targetZoom += e.deltaY * 0.01;
+                // targetZoom = Math.max(4, Math.min(targetZoom, 35)); 
             };
 
             initParticles();

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building High-Performance Ascii Canvases</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Instrument Sans"', 'sans-serif'],
+                        serif: ['"Instrument Serif"', 'serif'],
+                        mono: ['"Courier New"', 'Courier', 'monospace'],
+                    },
+                    typography: {
+                        DEFAULT: {
+                            css: {
+                                color: '#BDBDBD',
+                                h2: { color: '#FFFFFF', fontFamily: '"Instrument Sans", sans-serif', fontWeight: '500', letterSpacing: '-0.02em', marginTop: '3em', marginBottom: '1em' },
+                                h3: { color: '#FFFFFF', fontFamily: '"Instrument Sans", sans-serif', fontWeight: '500', marginTop: '2em', marginBottom: '0.8em' },
+                                a: { color: '#FF1F1F', '&:hover': { color: '#FFFFFF' }, transition: 'color 300ms ease' },
+                                blockquote: { borderLeftColor: '#FF1F1F', color: '#FFFFFF', fontStyle: 'italic', backgroundColor: '#FF1F1F08', padding: '1rem 1.5rem', borderRadius: '0 0.5rem 0.5rem 0' },
+                                strong: { color: '#FFFFFF' },
+                                code: { color: '#FF1F1F', backgroundColor: '#11112b', padding: '0.2em 0.4em', borderRadius: '0.25rem', fontFamily: '"Courier New", monospace', fontSize: '0.875em' },
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #00001c;
+            color: #FFFFFF;
+        }
+
+        /* Custom syntax highlighting look for pre blocks */
+        pre {
+            background-color: #0a0a1a !important;
+            border: 1px solid rgba(74, 74, 74, 0.3);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            overflow-x: auto;
+            color: #e2e8f0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.875rem;
+            margin: 2rem 0;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-size: 1.125rem;
+            color: #BDBDBD;
+        }
+        .article-content h2 {
+            font-size: 2.25rem;
+            color: #FFFFFF;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+        .article-content h3 {
+            font-size: 1.5rem;
+            color: #FFFFFF;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .article-content blockquote {
+            border-left: 2px solid #FF1F1F;
+            padding: 1.5rem 2rem;
+            margin: 2.5rem 0;
+            background-color: rgba(255, 31, 31, 0.03);
+            border-radius: 0 1rem 1rem 0;
+            color: #FFFFFF;
+            font-style: italic;
+            font-size: 1.25rem;
+            line-height: 1.6;
+        }
+        .article-content a {
+            color: #FF1F1F;
+            text-decoration: underline;
+            text-decoration-color: rgba(255, 31, 31, 0.4);
+            text-underline-offset: 4px;
+            transition: all 0.3s;
+        }
+        .article-content a:hover {
+            color: #FFFFFF;
+            text-decoration-color: #FFFFFF;
+        }
+    </style>
+</head>
+<body class="min-h-screen relative font-sans selection:bg-[#FF1F1F] selection:text-white pb-32">
+    
+    <!-- Subtle Background Elements -->
+    <div class="fixed inset-0 z-0 bg-gradient-to-b from-[#000000] to-[#00001c] pointer-events-none"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed bottom-8 left-8 md:bottom-12 md:left-12 z-50 flex flex-col items-start gap-1" id="nav-menu">
+        <a href="index.html" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Home</a>
+        <a href="index.html#about" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">About me</a>
+        <a href="index.html#works" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Projects</a>
+        <a href="blogs.html" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#C83030] font-medium border-b border-[#C83030]">Blogs</a>
+        <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Resume ↗</a>
+    </nav>
+
+    <main class="relative z-10 max-w-4xl mx-auto px-6 sm:px-12 pt-16 md:pt-24 flex flex-col gap-12 lg:gap-16 pb-24">
+        
+        <!-- Back Link -->
+        <a href="blogs.html" class="group inline-flex items-center gap-3 text-[#4A4A4A] hover:text-[#FF1F1F] transition-colors w-max outline-none font-mono text-xs uppercase tracking-widest">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transform transition-transform duration-300">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back to Articles
+        </a>
+
+        <!-- Header -->
+        <header class="flex flex-col gap-6">
+            <div class="flex flex-wrap items-center gap-4">
+                <span class="text-xs font-mono text-[#FF1F1F] bg-[#FF1F1F]/10 uppercase tracking-widest px-3 py-1.5 rounded-full">Engineering</span>
+                <span class="text-xs font-mono text-[#4A4A4A] tracking-widest uppercase">Mar 24, 2026</span>
+                <span class="text-xs font-mono text-[#4A4A4A] tracking-widest uppercase">•</span>
+                <span class="text-xs font-mono text-[#4A4A4A] tracking-widest uppercase">8 min read</span>
+            </div>
+            
+            <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-[5rem] font-serif text-white tracking-tight leading-[1.05] mt-2 mb-4">
+                Building High-Performance Ascii Canvases
+            </h1>
+
+            <div class="flex items-center gap-4 mt-4 py-6 border-y border-[#4A4A4A]/20">
+                <div class="w-12 h-12 rounded-full overflow-hidden bg-[#11112b] border border-[#4A4A4A]/30">
+                    <!-- Author Avatar Placeholder -->
+                    <div class="w-full h-full bg-gradient-to-br from-[#0a0a1a] to-[#00001c] flex items-center justify-center text-xs font-mono text-[#4A4A4A]">AC</div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-white font-medium tracking-wide">Abhilaksh Chauhan</span>
+                    <a href="https://x.com/" target="_blank" class="text-sm text-[#4A4A4A] hover:text-white transition-colors">@abhilaksh</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Image -->
+        <div class="relative w-full aspect-[21/9] bg-[#11112b] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden border border-[#4A4A4A]/30 shadow-2xl">
+            <div class="absolute inset-0 bg-gradient-to-b from-[#0a0a1a]/50 to-[#00001c]/80 flex items-center justify-center">
+                <span class="font-mono text-[#4A4A4A] tracking-widest uppercase text-sm">Hero Image Layout</span>
+            </div>
+        </div>
+
+        <!-- Article Content -->
+        <article class="article-content">
+            <p>
+                Diving deep into <code>requestAnimationFrame</code> paradigms, managing memory footprints in heavy loops, and manipulating raw pixel buffers to achieve a stable 60fps on potato devices. If you've ever tried manually rendering thousands of particles mathematically translating via perspective calculations, you know precisely where the engine chokes.
+            </p>
+
+            <h2>The Frame Render Sinkhole</h2>
+            <p>
+                For a very long time, writing canvas-based animations felt like solving an artificial bottleneck constraint. The DOM provides us with standard JS arrays, but dynamically resizing arrays directly inside of a render loop is the quickest way to crash user memory via immediate garbage collection dumps.
+            </p>
+
+            <p>
+                Instead, memory must be allocated upfront. Let's look at how we can buffer the grid data statically:
+            </p>
+
+<pre><code>// Pre-allocate typed arrays to prevent garbage collection sweeps
+const gridLength = cols * rows;
+let gridDensity = new Float32Array(gridLength);
+let gridR = new Float32Array(gridLength);
+let gridG = new Float32Array(gridLength);
+let gridB = new Float32Array(gridLength);
+
+const animate = () => {
+    // We clean, but we never reallocate
+    gridDensity.fill(0);
+    gridR.fill(0);
+    gridG.fill(0);
+    gridB.fill(0);
+    
+    // Engine sequence continues...
+    requestAnimationFrame(animate);
+};</code></pre>
+
+            <p>
+                This paradigm shift isn't just about speeding up math ops, it's about fundamentally respecting the browser's constraints. It is shockingly easy to bypass DOM bottlenecks when you stop instantiating objects 60 times a second.
+            </p>
+
+            <blockquote>
+                "Beautiful software is not just about what is rendered to the glass. It is about how gracefully your engine dances within the bounds of limited hardware."
+            </blockquote>
+
+            <h2>Mapping Dimensions</h2>
+            <p>
+                With the grid pre-allocated, we shift our focus to applying matrices. By mapping coordinates <code>{x, y, z}</code> through pitch and yaw modifiers dynamically linked to global mouse bindings, we effectively offload the illusion of rotation while only manipulating fundamental offsets. 
+            </p>
+            <p>
+                A core component here is ensuring we apply our perspective scaling only <em>after</em> rotation bounds are calculated, guaranteeing depth occlusion layers seamlessly without massive CPU trade offs. If you're interested in the physical math backing this, check out basic <a href="#">Euler angles</a> implementations in graphic projections.
+            </p>
+
+            <h2>Final Polish</h2>
+            <p>
+                The ASCII aesthetic demands low-opacity overlapping to look analog. Rather than pushing alpha on strings, rendering standard colored rectangles beneath the ASCII strings dramatically increases volume and perceived depth in the UI without relying entirely on expensive box-shadow or blurring techniques.
+            </p>
+        </article>
+
+        <!-- Article Footer / Share -->
+        <footer class="mt-8 pt-8 border-t border-[#4A4A4A]/20 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-4">
+                <span class="text-sm font-mono text-[#4A4A4A] uppercase tracking-widest">Share this</span>
+                <a href="#" class="w-10 h-10 rounded-full border border-[#4A4A4A]/30 flex items-center justify-center text-[#BDBDBD] hover:text-white hover:border-[#FF1F1F] hover:bg-[#FF1F1F]/10 transition-all duration-300">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full border border-[#4A4A4A]/30 flex items-center justify-center text-[#BDBDBD] hover:text-white hover:border-[#FF1F1F] hover:bg-[#FF1F1F]/10 transition-all duration-300">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M22.23 0H1.77C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.77 24h20.46c.978 0 1.77-.773 1.77-1.729V1.729C24 .774 23.208 0 22.23 0zM7.12 20.452H3.56V9h3.56v11.452zM5.34 7.434c-1.14 0-2.06-.92-2.06-2.06 0-1.14.92-2.06 2.06-2.06s2.06.92 2.06 2.06c0 1.14-.92 2.06-2.06 2.06zm15.116 13.018h-3.558v-5.568c0-1.328-.024-3.036-1.852-3.036-1.85 0-2.134 1.444-2.134 2.94v5.664H9.362V9h3.414v1.566h.048c.476-.9 1.636-1.85 3.37-1.85 3.606 0 4.266 2.372 4.266 5.454v6.282z"/></svg>
+                </a>
+            </div>
+            
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="inline-flex items-center justify-center gap-3 text-[#4A4A4A] hover:text-white transition-colors focus:outline-none cursor-pointer font-mono text-xs uppercase tracking-widest group">
+                <span>Top</span>
+                <span class="transform transition-transform duration-300 group-hover:-translate-y-1">↑</span>
+            </button>
+        </footer>
+
+    </main>
+</body>
+</html>

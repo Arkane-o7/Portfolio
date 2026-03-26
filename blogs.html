@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs - Abhilaksh Chauhan</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Instrument Sans"', 'sans-serif'],
+                        serif: ['"Instrument Serif"', 'serif'],
+                        mono: ['"Courier New"', 'Courier', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #00001c;
+            color: #FFFFFF;
+        }
+    </style>
+</head>
+<body class="min-h-screen relative font-sans selection:bg-[#FF1F1F] selection:text-white pb-32">
+    
+    <!-- Subtle Background Elements -->
+    <div class="fixed inset-0 z-0 bg-gradient-to-b from-black to-[#00001c] pointer-events-none"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed bottom-8 left-8 md:bottom-12 md:left-12 z-50 flex flex-col items-start gap-1" id="nav-menu">
+        <a href="index.html" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Home</a>
+        <a href="index.html#about" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">About me</a>
+        <a href="index.html#works" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Projects</a>
+        <a href="blogs.html" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#C83030] font-medium border-b border-[#C83030]">Blogs</a>
+        <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Resume ↗</a>
+    </nav>
+
+    <main class="relative z-10 max-w-7xl mx-auto px-6 sm:px-12 pt-16 md:pt-32 flex flex-col gap-24">
+        
+        <!-- Header Section -->
+        <header class="flex flex-col gap-8 max-w-3xl">
+            <h1 class="text-5xl sm:text-6xl md:text-8xl font-serif text-white tracking-tight leading-[1.1]">
+                Blogs <span class="italic text-[#FF1F1F] font-light">&</span> Ramblings.
+            </h1>
+            <p class="text-xl md:text-2xl text-[#BDBDBD] font-light leading-relaxed">
+                Documenting engineering adventures, aesthetic rants, and a healthy obsession with optimizing everything.
+            </p>
+        </header>
+
+        <!-- Articles Grid List -->
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 w-full">
+            
+            <!-- Article 1 -->
+            <article class="group relative flex flex-col w-full outline-none transition-transform duration-500 hover:scale-[1.02]">
+                <div class="relative w-full aspect-[4/3] bg-[#11112b] rounded-[1.5rem] overflow-hidden border border-[#4A4A4A]/20 mb-6 shadow-2xl transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-br from-[#0a0a1a] to-[#00001c] opacity-80 backdrop-blur-sm flex items-center justify-center font-mono text-[#4A4A4A]">IMAGE REF</div>
+                </div>
+                
+                <div class="flex flex-col">
+                    <a href="article.html" class="absolute inset-0 z-10" aria-label="Read Post"></a>
+                    
+                    <div class="flex items-center gap-4 mb-4 relative z-20 pointer-events-none">
+                        <div class="text-xs font-mono text-[#4A4A4A] tracking-widest uppercase transition-colors group-hover:text-[#FF1F1F]">
+                            Mar 24, 2026
+                        </div>
+                        <span class="text-[10px] font-mono text-[#FF1F1F] bg-[#FF1F1F]/10 uppercase tracking-widest px-3 py-1 rounded-full">Engineering</span>
+                    </div>
+
+                    <h2 class="text-2xl md:text-3xl font-sans font-medium text-white mb-3 tracking-tight transition-colors duration-500 group-hover:text-[#FF1F1F]">
+                        Building High-Performance Ascii Canvases
+                    </h2>
+                    
+                    <p class="text-[#BDBDBD] text-base leading-relaxed mb-6">
+                        Diving deep into requestAnimationFrame paradigms, managing memory footprints in heavy loops, and manipulating raw pixel buffers...
+                    </p>
+
+                    <div class="mt-auto inline-flex items-center justify-center w-12 h-12 rounded-full border border-[#4A4A4A]/30 text-white group-hover:bg-[#FF1F1F] group-hover:border-[#FF1F1F] group-hover:shadow-[0_0_20px_rgba(255,31,31,0.4)] transition-all duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transform -rotate-45">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                        </svg>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article 2 -->
+            <article class="group relative flex flex-col w-full outline-none transition-transform duration-500 hover:scale-[1.02]">
+                <div class="relative w-full aspect-[4/3] bg-[#11112b] rounded-[1.5rem] overflow-hidden border border-[#4A4A4A]/20 mb-6 shadow-2xl transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-tl from-[#0a0a1a] to-[#00001c] opacity-80 backdrop-blur-sm flex items-center justify-center font-mono text-[#4A4A4A]">IMAGE REF</div>
+                </div>
+                
+                <div class="flex flex-col">
+                    <a href="article.html" class="absolute inset-0 z-10" aria-label="Read Post"></a>
+                    
+                    <div class="flex items-center gap-4 mb-4 relative z-20 pointer-events-none">
+                        <div class="text-xs font-mono text-[#4A4A4A] tracking-widest uppercase transition-colors group-hover:text-[#FF1F1F]">
+                            Jan 12, 2026
+                        </div>
+                        <span class="text-[10px] font-mono text-[#FF1F1F] bg-[#FF1F1F]/10 uppercase tracking-widest px-3 py-1 rounded-full">Design</span>
+                    </div>
+
+                    <h2 class="text-2xl md:text-3xl font-sans font-medium text-white mb-3 tracking-tight transition-colors duration-500 group-hover:text-[#FF1F1F]">
+                        The Death of 'AI Slop' Aesthetics
+                    </h2>
+                    
+                    <p class="text-[#BDBDBD] text-base leading-relaxed mb-6">
+                        Why building unique, brutalist, and personalized web interfaces is the only way to stand out in an era of auto-generated templates.
+                    </p>
+
+                    <div class="mt-auto inline-flex items-center justify-center w-12 h-12 rounded-full border border-[#4A4A4A]/30 text-white group-hover:bg-[#FF1F1F] group-hover:border-[#FF1F1F] group-hover:shadow-[0_0_20px_rgba(255,31,31,0.4)] transition-all duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transform -rotate-45">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                        </svg>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article 3 -->
+            <article class="group relative flex flex-col w-full outline-none transition-transform duration-500 hover:scale-[1.02]">
+                <div class="relative w-full aspect-[4/3] bg-[#11112b] rounded-[1.5rem] overflow-hidden border border-[#4A4A4A]/20 mb-6 shadow-2xl transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-b from-[#0a0a1a] to-[#00001c] opacity-80 backdrop-blur-sm flex items-center justify-center font-mono text-[#4A4A4A]">IMAGE REF</div>
+                </div>
+                
+                <div class="flex flex-col">
+                    <a href="article.html" class="absolute inset-0 z-10" aria-label="Read Post"></a>
+                    
+                    <div class="flex items-center gap-4 mb-4 relative z-20 pointer-events-none">
+                        <div class="text-xs font-mono text-[#4A4A4A] tracking-widest uppercase transition-colors group-hover:text-[#FF1F1F]">
+                            Nov 05, 2025
+                        </div>
+                        <span class="text-[10px] font-mono text-[#FF1F1F] bg-[#FF1F1F]/10 uppercase tracking-widest px-3 py-1 rounded-full">Rust</span>
+                    </div>
+
+                    <h2 class="text-2xl md:text-3xl font-sans font-medium text-white mb-3 tracking-tight transition-colors duration-500 group-hover:text-[#FF1F1F]">
+                        Scaling Redis with Native Rust Addons
+                    </h2>
+                    
+                    <p class="text-[#BDBDBD] text-base leading-relaxed mb-6">
+                        A retrospective on ripping out legacy middleware and injecting native Rust extensions to process throughput up to 400% faster.
+                    </p>
+
+                    <div class="mt-auto inline-flex items-center justify-center w-12 h-12 rounded-full border border-[#4A4A4A]/30 text-white group-hover:bg-[#FF1F1F] group-hover:border-[#FF1F1F] group-hover:shadow-[0_0_20px_rgba(255,31,31,0.4)] transition-all duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transform -rotate-45">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                        </svg>
+                    </div>
+                </div>
+            </article>
+
+
+        <!-- Footer matched -->
+        <footer class="mt-8 text-[#4A4A4A] flex flex-col md:flex-row justify-between items-start md:items-center text-xs md:text-sm font-mono tracking-widest uppercase">
+            <p>© 2026 Abhilaksh Chauhan</p>
+        </footer>
+
+    </main>
+</body>
+</html>

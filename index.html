@@ -47,14 +47,14 @@
         }
     </style>
 </head>
-<body class="min-h-screen bg-[#000000] text-white font-sans relative selection:bg-[#FF1F1F] selection:text-white">
+<body class="min-h-screen bg-[#000000] text-white font-sans relative selection:bg-[#C83030] selection:text-white">
 
     <!-- Navigation -->
     <nav class="fixed bottom-8 left-8 md:bottom-12 md:left-12 z-50 flex flex-col items-start gap-1" id="nav-menu">
-        <a href="/" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#FF1F1F] font-medium border-b border-[#FF1F1F]">Home</a>
-        <a href="/about_me" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">About me</a>
-        <a href="/projects" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Projects</a>
-        <a href="/blogs" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Blogs</a>
+        <a href="/" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#C83030] font-medium border-b border-[#C83030]">Home</a>
+        <a href="/#about" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent" data-target="about">About me</a>
+        <a href="/#works" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent" data-target="works">Projects</a>
+        <a href="blogs.html" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Blogs</a>
         <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Resume ↗</a>
     </nav>
 
@@ -84,7 +84,7 @@
 
             <!-- Foreground Content -->
             <div class="relative z-10 pointer-events-none">
-                <p class="text-[#FF1F1F] font-sans text-lg md:text-xl mb-4 font-medium tracking-wide pointer-events-auto w-max">
+                <p class="text-[#C83030] font-sans text-lg md:text-xl mb-4 font-medium tracking-wide pointer-events-auto w-max">
                     Hey there! im
                 </p>
                 
@@ -172,37 +172,178 @@
                 </div>
             </section>
 
-            <section id="works" class="min-h-screen pt-48 md:pt-64 pb-24">
-                <h2 class="font-serif text-5xl md:text-7xl mb-12">Stuff I have worked on.</h2>
-                <p class="text-[#BDBDBD] text-xl max-w-2xl leading-relaxed">
-                    [Projects and stuff you have worked on goes here. We can use cool grid layouts or lists.]
-                </p>
+            <section id="works" class="pt-48 md:pt-64 pb-24 relative">
+                <div class="flex flex-col lg:flex-row gap-16 items-start">
+                    <!-- Left Sticky Heading -->
+                    <div class="lg:w-1/3 lg:sticky lg:top-48 shrink-0 relative z-10">
+                        <h2 class="font-serif text-5xl md:text-7xl mb-6 leading-tight">Stuff I have <br><span class="italic text-[#C83030]">worked on.</span></h2>
+                        <p class="text-[#BDBDBD] text-xl leading-relaxed max-w-sm">
+                            A curated selection of my projects, experiments, and technical deep dives. Scroll to explore!
+                        </p>
+                    </div>
+
+                    <!-- Right Scrolling Project Cards -->
+                    <div class="lg:w-2/3 flex flex-col gap-16 lg:gap-32 w-full mt-12 lg:mt-0 pr-4 sm:pr-8 md:pr-12 lg:pr-24 xl:pr-40 2xl:pr-56">
+                        
+                        <!-- Project Card 1 -->
+                        <div class="group relative block w-full outline-none transition-transform duration-500 hover:scale-[1.02]">
+                            <div class="relative w-full aspect-[16/9] bg-[#11112b] rounded-[2rem] overflow-hidden border border-[#4A4A4A]/20 mb-8 shadow-2xl transition-all duration-700">
+                                <!-- Placeholder Image Area -->
+                                <div class="absolute inset-0 bg-gradient-to-br from-[#0a0a1a] to-[#00001c] opacity-80 backdrop-blur-sm flex items-center justify-center font-mono text-[#4A4A4A]">IMAGE REF</div>
+                            </div>
+                            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 px-2">
+                                <div>
+                                    <h3 class="font-sans text-3xl md:text-4xl text-white mb-3 tracking-tight group-hover:text-[#C83030] transition-colors duration-300">Project Alpha</h3>
+                                    <p class="text-[#BDBDBD] text-lg max-w-xl">A complete overhaul of a legacy backend system, increasing throughput by 400% using Rust and Redis.</p>
+                                    <div class="flex flex-wrap gap-3 mt-6">
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Rust</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Redis</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">System Design</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="inline-flex shrink-0 items-center justify-center w-14 h-14 rounded-full bg-[#11112b] border border-[#4A4A4A]/30 text-white group-hover:bg-[#C83030] group-hover:border-[#C83030] transition-all duration-300">
+                                    <span class="text-2xl transform -rotate-45">→</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Project Card 2 -->
+                        <div class="group relative block w-full outline-none transition-transform duration-500 hover:scale-[1.02]">
+                            <div class="relative w-full aspect-[16/9] bg-[#11112b] rounded-[2rem] overflow-hidden border border-[#4A4A4A]/20 mb-8 shadow-2xl transition-all duration-700">
+                                <!-- Placeholder Image Area -->
+                                <div class="absolute inset-0 bg-gradient-to-tl from-[#0a0a1a] to-[#00001c] opacity-80 backdrop-blur-sm flex items-center justify-center font-mono text-[#4A4A4A]">IMAGE REF</div>
+                            </div>
+                            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 px-2">
+                                <div>
+                                    <h3 class="font-sans text-3xl md:text-4xl text-white mb-3 tracking-tight group-hover:text-[#C83030] transition-colors duration-300">E-Commerce Platform</h3>
+                                    <p class="text-[#BDBDBD] text-lg max-w-xl">A highly scalable headless commerce solution combining Next.js with a custom Node.js microservices architecture.</p>
+                                    <div class="flex flex-wrap gap-3 mt-6">
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Next.js</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Node.js</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">PostgreSQL</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="inline-flex shrink-0 items-center justify-center w-14 h-14 rounded-full bg-[#11112b] border border-[#4A4A4A]/30 text-white group-hover:bg-[#C83030] group-hover:border-[#C83030] transition-all duration-300">
+                                    <span class="text-2xl transform -rotate-45">→</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Project Card 3 -->
+                        <div class="group relative block w-full outline-none transition-transform duration-500 hover:scale-[1.02]">
+                            <div class="relative w-full aspect-[16/9] bg-[#11112b] rounded-[2rem] overflow-hidden border border-[#4A4A4A]/20 mb-8 shadow-2xl transition-all duration-700">
+                                <!-- Placeholder Image Area -->
+                                <div class="absolute inset-0 bg-gradient-to-tr from-[#0a0a1a] to-[#00001c] opacity-80 backdrop-blur-sm flex items-center justify-center font-mono text-[#4A4A4A]">IMAGE REF</div>
+                            </div>
+                            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 px-2">
+                                <div>
+                                    <h3 class="font-sans text-3xl md:text-4xl text-white mb-3 tracking-tight group-hover:text-[#C83030] transition-colors duration-300">Interactive WebGL App</h3>
+                                    <p class="text-[#BDBDBD] text-lg max-w-xl">An immersive data visualization tool built directly in browser using Three.js and raw WebGL shaders.</p>
+                                    <div class="flex flex-wrap gap-3 mt-6">
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Three.js</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">WebGL</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">GLSL</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="inline-flex shrink-0 items-center justify-center w-14 h-14 rounded-full bg-[#11112b] border border-[#4A4A4A]/30 text-white group-hover:bg-[#C83030] group-hover:border-[#C83030] transition-all duration-300">
+                                    <span class="text-2xl transform -rotate-45">→</span>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </section>
 
-            <section id="journey" class="min-h-screen pt-48 md:pt-64 pb-24">
-                <h2 class="font-serif text-5xl md:text-7xl mb-12">Journey so far.</h2>
-                <p class="text-[#BDBDBD] text-xl max-w-2xl leading-relaxed">
-                    [Timeline of internships, jobs, and experience goes here.]
-                </p>
+            <section id="journey" class="mt-48 pb-48 md:pb-64 relative">
+                
+                <!-- Sticky Heading & Fade Mask -->
+                <div class="sticky top-0 z-30 pt-16 md:pt-24 pb-8 bg-[#00001c]">
+                    <h2 class="font-serif text-5xl md:text-7xl mb-6 leading-tight">Journey<br><span class="italic text-[#C83030]">so far.</span></h2>
+                    <p class="text-[#BDBDBD] text-xl leading-relaxed max-w-sm">
+                        A timeline of my education, experiences, and milestones.
+                    </p>
+                    <!-- Gradient blur to hide elements gracefully as they scroll up into the heading -->
+                    <div class="absolute bottom-[-3rem] left-0 right-0 h-12 bg-gradient-to-b from-[#00001c] to-transparent pointer-events-none"></div>
+                </div>
+
+                <!-- Timeline (Single Column Layout Below) -->
+                <div class="flex flex-col w-full mt-16 pl-2 lg:pl-8 max-w-4xl relative z-10 pr-4">
+                    <div class="relative border-l border-[#4A4A4A]/30 ml-3 md:ml-4 pb-16">
+                        
+                        <!-- Timeline Item 1 (Active) -->
+                        <div class="mb-20 relative pl-10 md:pl-16 group">
+                            <!-- Marker -->
+                            <div class="absolute left-[-5.5px] top-2 w-3 h-3 bg-[#C83030] rounded-full shadow-[0_0_15px_rgba(200,48,48,0.8)] transition-transform duration-300 group-hover:scale-150"></div>
+                            
+                            <div class="mb-2 text-[#4A4A4A] font-mono text-sm tracking-widest group-hover:text-[#C83030]/70 transition-colors duration-300">2024 - PRESENT</div>
+                            <h3 class="font-sans text-2xl md:text-4xl text-white mb-2 tracking-tight group-hover:text-[#C83030] transition-colors duration-300">Computer Science, B.Tech</h3>
+                            <h4 class="text-white opacity-80 text-lg mb-4 font-medium">VIT Vellore</h4>
+                            <p class="text-[#BDBDBD] text-lg max-w-2xl leading-relaxed">
+                                Currently in my 2nd year. Deep diving into backend systems, scalable architectures, and active participation in multiple technical clubs.
+                            </p>
+                        </div>
+
+                        <!-- Timeline Item 2 -->
+                        <div class="mb-20 relative pl-10 md:pl-16 group">
+                            <!-- Marker -->
+                            <div class="absolute left-[-4.5px] top-2 w-[10px] h-[10px] bg-[#00001c] border-2 border-[#4A4A4A] rounded-full transition-all duration-300 group-hover:border-[#C83030] group-hover:bg-[#C83030] group-hover:scale-125 group-hover:shadow-[0_0_10px_rgba(200,48,48,0.5)]"></div>
+                            
+                            <div class="mb-2 text-[#4A4A4A] font-mono text-sm tracking-widest group-hover:text-white/70 transition-colors duration-300">SUMMER 2023</div>
+                            <h3 class="font-sans text-2xl md:text-3xl text-white mb-2 tracking-tight group-hover:text-white transition-colors duration-300">Software Engineering Intern</h3>
+                            <h4 class="text-white opacity-80 text-lg mb-4 font-medium">Tech Startup Inc.</h4>
+                            <p class="text-[#BDBDBD] text-lg max-w-2xl leading-relaxed">
+                                Built and maintained internal dashboards using React. Designed a set of Node.js microservices that improved data processing speed by 40%.
+                            </p>
+                        </div>
+
+                        <!-- Timeline Item 3 -->
+                        <div class="mb-20 relative pl-10 md:pl-16 group">
+                            <!-- Marker -->
+                            <div class="absolute left-[-4.5px] top-2 w-[10px] h-[10px] bg-[#00001c] border-2 border-[#4A4A4A] rounded-full transition-all duration-300 group-hover:border-[#C83030] group-hover:bg-[#C83030] group-hover:scale-125 group-hover:shadow-[0_0_10px_rgba(200,48,48,0.5)]"></div>
+                            
+                            <div class="mb-2 text-[#4A4A4A] font-mono text-sm tracking-widest group-hover:text-white/70 transition-colors duration-300">WINTER 2022</div>
+                            <h3 class="font-sans text-2xl md:text-3xl text-white mb-2 tracking-tight group-hover:text-white transition-colors duration-300">Open Source Contributor</h3>
+                            <h4 class="text-white opacity-80 text-lg mb-4 font-medium">Various Organizations</h4>
+                            <p class="text-[#BDBDBD] text-lg max-w-2xl leading-relaxed">
+                                Contributed to several tools and libraries. Learned the importance of clear documentation, CI/CD pipelines, and writing robust tests.
+                            </p>
+                        </div>
+
+                        <!-- Timeline Item 4 -->
+                        <div class="mb-8 relative pl-10 md:pl-16 group">
+                            <!-- Marker -->
+                            <div class="absolute left-[-4.5px] top-2 w-[10px] h-[10px] bg-[#00001c] border-2 border-[#4A4A4A] rounded-full transition-all duration-300 group-hover:border-[#C83030] group-hover:bg-[#C83030] group-hover:scale-125 group-hover:shadow-[0_0_10px_rgba(200,48,48,0.5)]"></div>
+                            
+                            <div class="mb-2 text-[#4A4A4A] font-mono text-sm tracking-widest group-hover:text-white/70 transition-colors duration-300">EARLY 2022</div>
+                            <h3 class="font-sans text-2xl md:text-3xl text-white mb-2 tracking-tight group-hover:text-white transition-colors duration-300">First Lines of Code</h3>
+                            <h4 class="text-white opacity-80 text-lg mb-4 font-medium">Self-Taught</h4>
+                            <p class="text-[#BDBDBD] text-lg max-w-2xl leading-relaxed">
+                                Started my journey writing simple Python automation scripts. Eventually transitioned into full-stack web development and fell in love with building products.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
             </section>
         </div>
 
         <section id="connect" class="pl-8 pr-8 md:pl-64 lg:pl-80 relative z-10 min-h-[80vh] pt-24 pb-8 flex flex-col justify-between" style="background: linear-gradient(to bottom, #00001c 0%, #000000 100%);">
             <div>
-                <h2 class="font-serif text-5xl sm:text-7xl md:text-[6rem] mb-12 tracking-tight">Let's build<br><span class="text-[#FF1F1F] italic">something.</span></h2>
+                <h2 class="font-serif text-5xl sm:text-7xl md:text-[6rem] mb-12 tracking-tight">Let's build<br><span class="text-[#C83030] italic">something.</span></h2>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-16 mt-16 max-w-4xl">
                         <div class="flex flex-col gap-6">
                             <h3 class="text-[#4A4A4A] text-sm font-mono uppercase tracking-widest mb-2">Socials</h3>
-                            <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="group text-3xl md:text-4xl hover:text-[#FF1F1F] transition-colors w-max flex items-center gap-4">
+                            <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="group text-3xl md:text-4xl hover:text-[#C83030] transition-colors w-max flex items-center gap-4">
                                 <svg class="w-8 h-8 md:w-10 md:h-10 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.113.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
                                 GitHub <span class="text-xl md:text-2xl transition-transform group-hover:translate-x-2 group-hover:-translate-y-2 opacity-0 group-hover:opacity-100">↗</span>
                             </a>
-                            <a href="https://linkedin.com/in/" target="_blank" rel="noopener noreferrer" class="group text-3xl md:text-4xl hover:text-[#FF1F1F] transition-colors w-max flex items-center gap-4">
+                            <a href="https://linkedin.com/in/" target="_blank" rel="noopener noreferrer" class="group text-3xl md:text-4xl hover:text-[#C83030] transition-colors w-max flex items-center gap-4">
                                 <svg class="w-8 h-8 md:w-10 md:h-10 fill-current" viewBox="0 0 24 24"><path d="M22.23 0H1.77C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.77 24h20.46c.978 0 1.77-.773 1.77-1.729V1.729C24 .774 23.208 0 22.23 0zM7.12 20.452H3.56V9h3.56v11.452zM5.34 7.434c-1.14 0-2.06-.92-2.06-2.06 0-1.14.92-2.06 2.06-2.06s2.06.92 2.06 2.06c0 1.14-.92 2.06-2.06 2.06zm15.116 13.018h-3.558v-5.568c0-1.328-.024-3.036-1.852-3.036-1.85 0-2.134 1.444-2.134 2.94v5.664H9.362V9h3.414v1.566h.048c.476-.9 1.636-1.85 3.37-1.85 3.606 0 4.266 2.372 4.266 5.454v6.282z"/></svg>
                                 LinkedIn <span class="text-xl md:text-2xl transition-transform group-hover:translate-x-2 group-hover:-translate-y-2 opacity-0 group-hover:opacity-100">↗</span>
                             </a>
-                            <a href="https://x.com/" target="_blank" rel="noopener noreferrer" class="group text-3xl md:text-4xl hover:text-[#FF1F1F] transition-colors w-max flex items-center gap-4">
+                            <a href="https://x.com/" target="_blank" rel="noopener noreferrer" class="group text-3xl md:text-4xl hover:text-[#C83030] transition-colors w-max flex items-center gap-4">
                                 <svg class="w-8 h-8 md:w-10 md:h-10 fill-current" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
                                 Twitter / X <span class="text-xl md:text-2xl transition-transform group-hover:translate-x-2 group-hover:-translate-y-2 opacity-0 group-hover:opacity-100">↗</span>
                             </a>
@@ -210,7 +351,7 @@
                         
                         <div class="flex flex-col gap-6">
                             <h3 class="text-[#4A4A4A] text-sm font-mono uppercase tracking-widest mb-2">Drop a line</h3>
-                            <a href="mailto:hello@abhilaksh.com" class="group text-2xl sm:text-3xl md:text-4xl hover:text-[#FF1F1F] transition-colors w-max flex items-center gap-4">
+                            <a href="mailto:hello@abhilaksh.com" class="group text-2xl sm:text-3xl md:text-4xl hover:text-[#C83030] transition-colors w-max flex items-center gap-4">
                                 <svg class="w-8 h-8 md:w-10 md:h-10 fill-current" viewBox="0 0 24 24"><path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" /><path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" /></svg>
                                 hello@abhilaksh.com <span class="text-xl md:text-2xl transition-transform group-hover:translate-x-2 group-hover:-translate-y-2 opacity-0 group-hover:opacity-100">↗</span>
                             </a>
@@ -225,8 +366,10 @@
                 <!-- Footer -->
                 <footer class="mt-32 pt-8 text-[#4A4A4A] flex flex-col md:flex-row justify-between items-start md:items-center text-xs md:text-sm font-mono tracking-widest uppercase">
                     <p>© 2026 Abhilaksh Chauhan</p>
-                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="mt-4 md:mt-0 group hover:text-white transition-colors cursor-pointer focus:outline-none">
-                        Back to top <span class="inline-block transition-transform group-hover:-translate-y-1 text-[#FF1F1F]">↑</span>
+                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="mt-4 md:mt-0 inline-flex shrink-0 items-center justify-center w-14 h-14 rounded-full bg-[#11112b] border border-[#4A4A4A]/30 text-white hover:bg-[#C83030] hover:border-[#C83030] hover:shadow-[0_0_20px_rgba(200,48,48,0.4)] transition-all duration-300 focus:outline-none cursor-pointer" aria-label="Back to top">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
+                        </svg>
                     </button>
                 </footer>
             </section>
@@ -255,7 +398,7 @@
 
                 navBtns.forEach(btn => {
                     if (btn.dataset.target === activeId) {
-                        btn.className = 'nav-btn text-lg md:text-xl transition-all duration-300 text-[#FF1F1F] font-medium border-b border-[#FF1F1F]';
+                        btn.className = 'nav-btn text-lg md:text-xl transition-all duration-300 text-[#C83030] font-medium border-b border-[#C83030]';
                     } else {
                         btn.className = 'nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent';
                     }
@@ -298,11 +441,11 @@
             let particles = [];
             
             let spin = 0;
-            let targetPitch = 0.5; let pitch = 0.5; 
-            let targetYaw = 0;   let yaw = 0;
-            let targetZoom = 14; let zoom = 14; 
+            let targetPitch = 0.7939; let pitch = 0.7939; 
+            let targetYaw = 0.6930;   let yaw = 0.6930;
+            let targetZoom = 4.0;     let zoom = 100.0; // Zoom starts far away and dives in!
             
-            let autoDrift = true;
+            let autoDrift = false; // Disabling auto-drift initially to let the user appreciate the fixed zooming angle
             let time = 0;
 
             let isDragging = false;
@@ -393,8 +536,8 @@
                 spin -= 0.0015;
 
                 if (autoDrift) {
-                    targetYaw = Math.sin(time * 0.3) * 0.15;
-                    targetPitch = 0.45 + Math.cos(time * 0.2) * 0.1;
+                    targetYaw = 0.6930 + Math.sin(time * 0.3) * 0.15;
+                    targetPitch = 0.7939 + Math.cos(time * 0.2) * 0.1;
                 }
 
                 yaw += (targetYaw - yaw) * 0.08;
@@ -432,7 +575,8 @@
                     fz += zoom;
                     if (fz < 0.1) continue;
 
-                    let depthWeight = 12 / fz;
+                    // Adding a small base value (0.2) so far away stars don't disappear completely
+                    let depthWeight = (12 / fz) + 0.2;
                     depthWeight *= 0.8 + 0.4 * Math.sin(time * 5 + i); 
 
                     let scale = perspective / fz;
@@ -548,8 +692,9 @@
             };
 
             const handleWheel = (e) => {
-                targetZoom += e.deltaY * 0.01;
-                targetZoom = Math.max(4, Math.min(targetZoom, 35)); 
+                // Zoom is locked
+                // targetZoom += e.deltaY * 0.01;
+                // targetZoom = Math.max(4, Math.min(targetZoom, 35)); 
             };
 
             initParticles();
