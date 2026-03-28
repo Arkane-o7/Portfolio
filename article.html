@@ -157,58 +157,8 @@
         </div>
 
         <!-- Article Content -->
-        <article class="article-content">
-            <p>
-                Diving deep into <code>requestAnimationFrame</code> paradigms, managing memory footprints in heavy loops, and manipulating raw pixel buffers to achieve a stable 60fps on potato devices. If you've ever tried manually rendering thousands of particles mathematically translating via perspective calculations, you know precisely where the engine chokes.
-            </p>
-
-            <h2>The Frame Render Sinkhole</h2>
-            <p>
-                For a very long time, writing canvas-based animations felt like solving an artificial bottleneck constraint. The DOM provides us with standard JS arrays, but dynamically resizing arrays directly inside of a render loop is the quickest way to crash user memory via immediate garbage collection dumps.
-            </p>
-
-            <p>
-                Instead, memory must be allocated upfront. Let's look at how we can buffer the grid data statically:
-            </p>
-
-<pre><code>// Pre-allocate typed arrays to prevent garbage collection sweeps
-const gridLength = cols * rows;
-let gridDensity = new Float32Array(gridLength);
-let gridR = new Float32Array(gridLength);
-let gridG = new Float32Array(gridLength);
-let gridB = new Float32Array(gridLength);
-
-const animate = () => {
-    // We clean, but we never reallocate
-    gridDensity.fill(0);
-    gridR.fill(0);
-    gridG.fill(0);
-    gridB.fill(0);
-    
-    // Engine sequence continues...
-    requestAnimationFrame(animate);
-};</code></pre>
-
-            <p>
-                This paradigm shift isn't just about speeding up math ops, it's about fundamentally respecting the browser's constraints. It is shockingly easy to bypass DOM bottlenecks when you stop instantiating objects 60 times a second.
-            </p>
-
-            <blockquote>
-                "Beautiful software is not just about what is rendered to the glass. It is about how gracefully your engine dances within the bounds of limited hardware."
-            </blockquote>
-
-            <h2>Mapping Dimensions</h2>
-            <p>
-                With the grid pre-allocated, we shift our focus to applying matrices. By mapping coordinates <code>{x, y, z}</code> through pitch and yaw modifiers dynamically linked to global mouse bindings, we effectively offload the illusion of rotation while only manipulating fundamental offsets. 
-            </p>
-            <p>
-                A core component here is ensuring we apply our perspective scaling only <em>after</em> rotation bounds are calculated, guaranteeing depth occlusion layers seamlessly without massive CPU trade offs. If you're interested in the physical math backing this, check out basic <a href="#">Euler angles</a> implementations in graphic projections.
-            </p>
-
-            <h2>Final Polish</h2>
-            <p>
-                The ASCII aesthetic demands low-opacity overlapping to look analog. Rather than pushing alpha on strings, rendering standard colored rectangles beneath the ASCII strings dramatically increases volume and perceived depth in the UI without relying entirely on expensive box-shadow or blurring techniques.
-            </p>
+        <article id="markdown-container" class="article-content">
+            <p class="text-[#BDBDBD]">Loading article...</p>
         </article>
 
         <!-- Article Footer / Share -->
@@ -230,5 +180,33 @@ const animate = () => {
         </footer>
 
     </main>
+
+    <script type="module">
+        import { marked } from 'https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js';
+        
+        async function loadArticle() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const articleId = urlParams.get('id');
+            const container = document.getElementById('markdown-container');
+            
+            if (!articleId) {
+                container.innerHTML = '<p class="text-[#FF1F1F]">Article not found.</p>';
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/posts/${articleId}.md`);
+                if (!response.ok) throw new Error('Failed to fetch article');
+                
+                const markdownText = await response.text();
+                container.innerHTML = marked.parse(markdownText);
+            } catch (error) {
+                console.error('Error loading article:', error);
+                container.innerHTML = '<p class="text-[#FF1F1F]">Failed to load article content.</p>';
+            }
+        }
+        
+        loadArticle();
+    </script>
 </body>
 </html>
