@@ -4,12 +4,13 @@ import { notFound } from 'next/navigation';
 import { getAllPosts, getPostHtml, getPostMeta } from '../../../lib/posts';
 
 export async function generateStaticParams() {
-  return getAllPosts().map((post) => ({ id: post.id }));
+  const posts = await getAllPosts();
+  return posts.map((post) => ({ id: post.id }));
 }
 
 export async function generateMetadata({ params }) {
-  const { id } = params;
-  const post = getPostMeta(id);
+  const { id } = await params;
+  const post = await getPostMeta(id);
   return { title: post?.title ?? 'Article Not Found' };
 }
 
@@ -70,8 +71,8 @@ function patchArticleTemplate(content, post, renderedMarkdown) {
 }
 
 export default async function ArticlePage({ params }) {
-  const { id } = params;
-  const post = getPostMeta(id);
+  const { id } = await params;
+  const post = await getPostMeta(id);
 
   if (!post) {
     notFound();

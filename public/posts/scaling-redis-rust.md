@@ -1,3 +1,13 @@
+---
+title: Scaling Redis with Native Rust Addons
+date: 2025-11-05
+category: Rust
+excerpt: A retrospective on ripping out legacy middleware and injecting native Rust extensions to process throughput up to 400% faster.
+readTime: 9 min read
+gradientClass: bg-gradient-to-b from-[#0a0a1a] to-[#00001c]
+published: true
+---
+
 When latency spikes and CPU usage climbs, incremental tuning eventually hits a wall.
 
 ## Where Rust helped

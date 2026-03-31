@@ -1,44 +1,94 @@
-import fs from 'node:fs/promises';
-import path from 'node:path';
+import Link from 'next/link';
 import { getAllPosts } from '../../lib/posts';
 
 export const metadata = {
   title: 'Blogs - Abhilaksh Chauhan',
 };
 
-function extractBodyInfo(html) {
-  const bodyMatch = html.match(/<body([^>]*)>([\s\S]*?)<\/body>/i);
-  if (!bodyMatch) {
-    return { className: '', content: '<main></main>' };
-  }
-
-  const attrs = bodyMatch[1] || '';
-  const classMatch = attrs.match(/class\s*=\s*"([^"]*)"/i);
-
-  return {
-    className: classMatch ? classMatch[1] : '',
-    content: bodyMatch[2],
-  };
-}
-
-function patchBlogCardLinks(content) {
-  const ids = getAllPosts().map((post) => post.id);
-  let i = 0;
-
-  return content.replace(/href="article\.html"/g, () => {
-    const id = ids[i] ?? ids[ids.length - 1] ?? 'ascii-canvases';
-    i += 1;
-    return `href="/article/${id}"`;
-  });
-}
-
 export default async function BlogsPage() {
-  const blogsPath = path.join(process.cwd(), 'blogs.html');
-  const rawHtml = await fs.readFile(blogsPath, 'utf8');
-  const bodyInfo = extractBodyInfo(rawHtml);
-  const patchedHtml = patchBlogCardLinks(bodyInfo.content);
+  const posts = await getAllPosts();
 
   return (
-    <div className={bodyInfo.className} dangerouslySetInnerHTML={{ __html: patchedHtml }} />
+    <div className="min-h-screen relative font-sans selection:bg-[#FF1F1F] selection:text-white pb-32">
+      <div className="fixed inset-0 z-0 bg-gradient-to-b from-black to-[#00001c] pointer-events-none" />
+
+      <nav className="fixed bottom-8 left-8 md:bottom-12 md:left-12 z-50 flex flex-col items-start gap-1" id="nav-menu">
+        <Link href="/" className="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">
+          Home
+        </Link>
+        <Link href="/#about" className="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">
+          About me
+        </Link>
+        <Link href="/#works" className="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">
+          Projects
+        </Link>
+        <Link href="/blogs" className="nav-btn text-lg md:text-xl transition-all duration-300 text-[#C83030] font-medium border-b border-[#C83030]">
+          Blogs
+        </Link>
+        <Link href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">
+          Resume ↗
+        </Link>
+      </nav>
+
+      <main className="relative z-10 max-w-7xl mx-auto px-6 sm:px-12 pt-16 md:pt-32 flex flex-col gap-24">
+        <header className="flex flex-col gap-8 max-w-3xl">
+          <h1 className="text-5xl sm:text-6xl md:text-8xl font-serif text-white tracking-tight leading-[1.1]">
+            Blogs <span className="italic text-[#FF1F1F] font-light">&</span> Ramblings.
+          </h1>
+          <p className="text-xl md:text-2xl text-[#BDBDBD] font-light leading-relaxed">
+            Documenting engineering adventures, aesthetic rants, and a healthy obsession with optimizing everything.
+          </p>
+        </header>
+
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 w-full">
+          {posts.map((post) => (
+            <article
+              key={post.id}
+              className="group relative flex flex-col w-full outline-none transition-transform duration-500 hover:scale-[1.02]"
+            >
+              <div className="relative w-full aspect-[4/3] bg-[#11112b] rounded-[1.5rem] overflow-hidden border border-[#4A4A4A]/20 mb-6 shadow-2xl transition-all duration-700">
+                {post.coverImage ? (
+                  <img src={post.coverImage} alt={post.title} className="absolute inset-0 w-full h-full object-cover" />
+                ) : (
+                  <div className="absolute inset-0 backdrop-blur-sm flex items-center justify-center font-mono text-[#4A4A4A]">
+                    IMAGE REF
+                  </div>
+                )}
+                <div className={`absolute inset-0 opacity-80 ${post.gradientClass}`} />
+              </div>
+
+              <div className="flex flex-col">
+                <Link href={`/article/${post.id}`} className="absolute inset-0 z-10" aria-label={`Read ${post.title}`} />
+
+                <div className="flex items-center gap-4 mb-4 relative z-20 pointer-events-none">
+                  <div className="text-xs font-mono text-[#4A4A4A] tracking-widest uppercase transition-colors group-hover:text-[#FF1F1F]">
+                    {post.date}
+                  </div>
+                  <span className="text-[10px] font-mono text-[#FF1F1F] bg-[#FF1F1F]/10 uppercase tracking-widest px-3 py-1 rounded-full">
+                    {post.category}
+                  </span>
+                </div>
+
+                <h2 className="text-2xl md:text-3xl font-sans font-medium text-white mb-3 tracking-tight transition-colors duration-500 group-hover:text-[#FF1F1F]">
+                  {post.title}
+                </h2>
+
+                <p className="text-[#BDBDBD] text-base leading-relaxed mb-6">{post.excerpt}</p>
+
+                <div className="mt-auto inline-flex items-center justify-center w-12 h-12 rounded-full border border-[#4A4A4A]/30 text-white group-hover:bg-[#FF1F1F] group-hover:border-[#FF1F1F] group-hover:shadow-[0_0_20px_rgba(255,31,31,0.4)] transition-all duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5 transform -rotate-45">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                  </svg>
+                </div>
+              </div>
+            </article>
+          ))}
+        </section>
+
+        <footer className="mt-8 text-[#4A4A4A] flex flex-col md:flex-row justify-between items-start md:items-center text-xs md:text-sm font-mono tracking-widest uppercase">
+          <p>© 2026 Abhilaksh Chauhan</p>
+        </footer>
+      </main>
+    </div>
   );
 }

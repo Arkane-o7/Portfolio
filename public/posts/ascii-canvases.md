@@ -1,3 +1,13 @@
+---
+title: Building High-Performance Ascii Canvases
+date: 2026-03-24
+category: Engineering
+excerpt: Diving deep into requestAnimationFrame paradigms, managing memory footprints in heavy loops, and manipulating raw pixel buffers...
+readTime: 8 min read
+gradientClass: bg-gradient-to-br from-[#0a0a1a] to-[#00001c]
+published: true
+---
+
 In classic computer graphics terminology, an ASCII 3D donut rendering pushes boundaries—not of the GPU, but of sheer creativity. Here's a brief dive into how manipulating character maps and console geometry yields surprisingly aesthetic output with minimal overhead.
 
 ## Building the Torus
