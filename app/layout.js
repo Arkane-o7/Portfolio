@@ -26,6 +26,20 @@ export default function RootLayout({ children }) {
             }
           }`}
         </Script>
+        <Script id="netlify-invite-redirect" strategy="beforeInteractive">
+          {`(() => {
+            try {
+              const hasInviteToken = window.location.hash.includes('invite_token=');
+              const isAdminPath = window.location.pathname === '/admin' || window.location.pathname === '/admin/';
+
+              if (hasInviteToken && !isAdminPath) {
+                window.location.replace('/admin/' + window.location.hash);
+              }
+            } catch (_) {
+              // no-op
+            }
+          })();`}
+        </Script>
         <Script src="https://cdn.tailwindcss.com" strategy="beforeInteractive" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
