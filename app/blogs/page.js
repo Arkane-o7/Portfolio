@@ -43,49 +43,55 @@ export default async function BlogsPage() {
           </p>
         </header>
 
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 w-full">
-          {posts.map((post) => (
-            <article
-              key={post.id}
-              className="group relative flex flex-col w-full outline-none transition-transform duration-500 hover:scale-[1.02]"
-            >
-              <div className="relative w-full aspect-[4/3] bg-[#11112b] rounded-[1.5rem] overflow-hidden border border-[#4A4A4A]/20 mb-6 shadow-2xl transition-all duration-700">
-                {post.coverImage ? (
-                  <img src={post.coverImage} alt={post.title} className="absolute inset-0 w-full h-full object-cover" />
-                ) : (
-                  <div className="absolute inset-0 backdrop-blur-sm flex items-center justify-center font-mono text-[#4A4A4A]">
-                    IMAGE REF
-                  </div>
-                )}
-                <div className={`absolute inset-0 opacity-80 ${post.gradientClass}`} />
-              </div>
-
-              <div className="flex flex-col">
+        <section className="flex flex-col gap-8 md:gap-10 w-full">
+          {posts.map((post, index) => {
+            return (
+              <article key={post.id} className="group relative w-full outline-none transition-transform duration-500 hover:scale-[1.01]">
                 <Link href={`/article/${post.id}`} className="absolute inset-0 z-10" aria-label={`Read ${post.title}`} />
 
-                <div className="flex items-center gap-4 mb-4 relative z-20 pointer-events-none">
-                  <div className="text-xs font-mono text-[#4A4A4A] tracking-widest uppercase transition-colors group-hover:text-[#FF1F1F]">
-                    {post.date}
+                <div className="relative flex flex-col lg:flex-row gap-8 lg:gap-10 rounded-[1.75rem] border border-[#4A4A4A]/20 bg-[#070714]/40 p-4 md:p-5 lg:p-6 overflow-hidden">
+                  <div className="relative bg-[#11112b] rounded-[1.5rem] overflow-hidden border border-[#4A4A4A]/20 shadow-2xl transition-all duration-700 w-full lg:w-[44%] aspect-[16/10] lg:aspect-auto lg:min-h-[22rem] mb-0 shrink-0">
+                    {post.coverImage ? (
+                      <img src={post.coverImage} alt={post.title} className="absolute inset-0 w-full h-full object-cover" />
+                    ) : (
+                      <div className="absolute inset-0 backdrop-blur-sm flex items-center justify-center font-mono text-[#4A4A4A]">
+                        IMAGE REF
+                      </div>
+                    )}
+                    <div className={`absolute inset-0 opacity-80 ${post.gradientClass}`} />
                   </div>
-                  <span className="text-[10px] font-mono text-[#FF1F1F] bg-[#FF1F1F]/10 uppercase tracking-widest px-3 py-1 rounded-full">
-                    {post.category}
-                  </span>
+
+                  <div className="flex flex-col lg:w-[56%]">
+                    <div className="flex items-center gap-4 mb-4 relative z-20 pointer-events-none">
+                      <div className="text-xs font-mono text-[#4A4A4A] tracking-widest uppercase transition-colors group-hover:text-[#FF1F1F]">
+                        {post.date}
+                      </div>
+                      <span className="text-[10px] font-mono text-[#FF1F1F] bg-[#FF1F1F]/10 uppercase tracking-widest px-3 py-1 rounded-full">
+                        {post.category}
+                      </span>
+                      {index === 0 ? (
+                        <span className="text-[10px] font-mono text-white bg-white/10 uppercase tracking-widest px-3 py-1 rounded-full border border-white/20">
+                          Most Recent
+                        </span>
+                      ) : null}
+                    </div>
+
+                    <h2 className="font-sans font-medium text-white mb-3 tracking-tight transition-colors duration-500 group-hover:text-[#FF1F1F] text-3xl md:text-4xl lg:text-5xl">
+                      {post.title}
+                    </h2>
+
+                    <p className="text-[#BDBDBD] leading-relaxed mb-6 text-lg md:text-xl max-w-3xl">{post.excerpt}</p>
+
+                    <div className="mt-auto inline-flex items-center justify-center w-12 h-12 rounded-full border border-[#4A4A4A]/30 text-white group-hover:bg-[#FF1F1F] group-hover:border-[#FF1F1F] group-hover:shadow-[0_0_20px_rgba(255,31,31,0.4)] transition-all duration-300">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5 transform -rotate-45">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                      </svg>
+                    </div>
+                  </div>
                 </div>
-
-                <h2 className="text-2xl md:text-3xl font-sans font-medium text-white mb-3 tracking-tight transition-colors duration-500 group-hover:text-[#FF1F1F]">
-                  {post.title}
-                </h2>
-
-                <p className="text-[#BDBDBD] text-base leading-relaxed mb-6">{post.excerpt}</p>
-
-                <div className="mt-auto inline-flex items-center justify-center w-12 h-12 rounded-full border border-[#4A4A4A]/30 text-white group-hover:bg-[#FF1F1F] group-hover:border-[#FF1F1F] group-hover:shadow-[0_0_20px_rgba(255,31,31,0.4)] transition-all duration-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5 transform -rotate-45">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                  </svg>
-                </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </section>
 
         <footer className="mt-8 text-[#4A4A4A] flex flex-col md:flex-row justify-between items-start md:items-center text-xs md:text-sm font-mono tracking-widest uppercase">
