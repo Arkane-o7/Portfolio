@@ -39,7 +39,7 @@
     
     <style>
         body {
-            background-color: #00001c;
+            background-color: var(--theme-bg-secondary);
             color: #FFFFFF;
         }
 
@@ -103,7 +103,7 @@
 <body class="min-h-screen relative font-sans selection:bg-[#FF1F1F] selection:text-white pb-32">
     
     <!-- Subtle Background Elements -->
-    <div class="fixed inset-0 z-0 bg-gradient-to-b from-[#000000] to-[#00001c] pointer-events-none"></div>
+    <div class="fixed inset-0 z-0 theme-bg-gradient-main pointer-events-none"></div>
 
     <!-- Navigation -->
     <nav class="fixed bottom-8 left-8 md:bottom-12 md:left-12 z-50 flex flex-col items-start gap-1" id="nav-menu">
@@ -112,6 +112,7 @@
         <a href="index.html#works" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Projects</a>
         <a href="blogs.html" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#C83030] font-medium border-b border-[#C83030]">Blogs</a>
         <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Resume <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block w-4 h-4 ml-1 align-[-0.1em] transform -rotate-45"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></a>
+        <button type="button" data-theme-toggle class="theme-toggle-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Theme: <span data-theme-toggle-label>Light mode</span></button>
     </nav>
 
     <main class="relative z-10 max-w-4xl mx-auto px-6 sm:px-12 pt-16 md:pt-24 flex flex-col gap-12 lg:gap-16 pb-24">

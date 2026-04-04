@@ -10,7 +10,7 @@ export default async function BlogsPage() {
 
   return (
     <div className="min-h-screen relative font-sans selection:bg-[#FF1F1F] selection:text-white pb-32">
-      <div className="fixed inset-0 z-0 bg-gradient-to-b from-black to-[#00001c] pointer-events-none" />
+      <div className="fixed inset-0 z-0 theme-bg-gradient-main pointer-events-none" />
 
       <nav className="fixed bottom-8 left-8 md:bottom-12 md:left-12 z-50 flex flex-col items-start gap-1" id="nav-menu">
         <Link href="/" className="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">
@@ -31,6 +31,9 @@ export default async function BlogsPage() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
           </svg>
         </Link>
+        <button type="button" data-theme-toggle className="theme-toggle-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">
+          Theme: <span data-theme-toggle-label>Light mode</span>
+        </button>
       </nav>
 
       <main className="relative z-10 max-w-7xl mx-auto px-6 sm:px-12 pt-16 md:pt-32 flex flex-col gap-24">
@@ -49,16 +52,16 @@ export default async function BlogsPage() {
               <article key={post.id} className="group relative w-full outline-none transition-transform duration-500 hover:scale-[1.01]">
                 <Link href={`/article/${post.id}`} className="absolute inset-0 z-10" aria-label={`Read ${post.title}`} />
 
-                <div className="relative flex flex-col lg:flex-row gap-8 lg:gap-10 rounded-[1.75rem] border border-[#4A4A4A]/20 bg-[#070714]/40 p-4 md:p-5 lg:p-6 overflow-hidden">
-                  <div className="relative bg-[#11112b] rounded-[1.5rem] overflow-hidden border border-[#4A4A4A]/20 shadow-2xl transition-all duration-700 w-full lg:w-[44%] aspect-[16/10] lg:aspect-auto lg:min-h-[22rem] mb-0 shrink-0">
+                <div className="blog-card-shell relative flex flex-col lg:flex-row gap-8 lg:gap-10 rounded-[1.75rem] border border-[#4A4A4A]/20 bg-[#070714]/40 p-4 md:p-5 lg:p-6 overflow-hidden">
+                  <div className="blog-card-media relative bg-[#11112b] rounded-[1.5rem] overflow-hidden border border-[#4A4A4A]/20 shadow-2xl transition-shadow duration-500 w-full lg:w-[44%] aspect-[16/10] lg:min-h-[22rem] mb-0 shrink-0">
                     {post.coverImage ? (
                       <img src={post.coverImage} alt={post.title} className="absolute inset-0 w-full h-full object-cover" />
                     ) : (
-                      <div className="absolute inset-0 backdrop-blur-sm flex items-center justify-center font-mono text-[#4A4A4A]">
+                      <div className="blog-card-placeholder absolute inset-0 flex items-center justify-center font-mono text-[#4A4A4A]">
                         IMAGE REF
                       </div>
                     )}
-                    <div className={`absolute inset-0 opacity-80 ${post.gradientClass}`} />
+                    <div className={`blog-card-gradient absolute inset-0 opacity-80 ${post.gradientClass}`} />
                   </div>
 
                   <div className="flex flex-col lg:w-[56%]">
@@ -76,7 +79,7 @@ export default async function BlogsPage() {
                       ) : null}
                     </div>
 
-                    <h2 className="font-sans font-medium text-white mb-3 tracking-tight transition-colors duration-500 group-hover:text-[#FF1F1F] text-3xl md:text-4xl lg:text-5xl">
+                    <h2 className="blog-card-title font-sans font-medium text-white mb-3 tracking-tight transition-colors duration-500 group-hover:text-[#FF1F1F] text-3xl md:text-4xl lg:text-5xl">
                       {post.title}
                     </h2>
 

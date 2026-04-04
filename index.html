@@ -30,7 +30,7 @@
 
     <style>
         html { scroll-behavior: smooth; }
-        body { background-color: #000000; color: #FFFFFF; }
+        body { background-color: var(--theme-bg-primary); color: #FFFFFF; }
 
         .crt-overlay {
             background: 
@@ -47,7 +47,7 @@
         }
     </style>
 </head>
-<body class="min-h-screen bg-[#000000] text-white font-sans relative selection:bg-[#C83030] selection:text-white">
+<body class="min-h-screen text-white font-sans relative selection:bg-[#C83030] selection:text-white">
 
     <!-- Navigation -->
     <nav class="fixed bottom-8 left-8 md:bottom-12 md:left-12 z-50 flex flex-col items-start gap-1" id="nav-menu">
@@ -56,6 +56,7 @@
         <a href="/#works" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent" data-target="works">Projects</a>
         <a href="blogs.html" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Blogs</a>
         <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Resume <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block w-4 h-4 ml-1 align-[-0.1em] transform -rotate-45"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></a>
+        <button type="button" data-theme-toggle class="theme-toggle-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Theme: <span data-theme-toggle-label>Light mode</span></button>
     </nav>
 
     <!-- MAIN CONTENT WRAPPER -->
@@ -65,7 +66,7 @@
         <section id="home" class="relative min-h-screen flex flex-col justify-center px-8 md:px-12 pt-32 pb-16 overflow-hidden">
             
             <!-- Ascii Galaxy Background -->
-            <div class="absolute inset-0 z-0 overflow-hidden" style="background: linear-gradient(to bottom, #000000 0%, #00001c 100%);" id="canvas-container">
+            <div class="absolute inset-0 z-0 overflow-hidden theme-bg-gradient-main" id="canvas-container">
                 <div class="crt-overlay absolute inset-0 z-10 pointer-events-none"></div>
                 <canvas 
                     id="galaxyCanvas"
@@ -111,7 +112,7 @@
         </section>
 
         <!-- SECTIONS -->
-        <div class="pl-8 pr-8 md:pl-64 lg:pl-80 relative z-10 bg-[#00001c]">
+        <div class="pl-8 pr-8 md:pl-64 lg:pl-80 relative z-10 theme-bg-secondary">
             
             <section id="about" class="min-h-screen pt-48 md:pt-64 pb-24 flex flex-col justify-center">
                 <div class="flex flex-col xl:flex-row gap-16 xl:items-center justify-between">
@@ -264,13 +265,13 @@
             <section id="journey" class="mt-48 pb-48 md:pb-64 relative">
                 
                 <!-- Sticky Heading & Fade Mask -->
-                <div class="sticky top-0 z-30 pt-16 md:pt-24 pb-8 bg-[#00001c]">
+                <div class="sticky top-0 z-30 pt-16 md:pt-24 pb-8 theme-bg-secondary">
                     <h2 class="font-serif text-5xl md:text-7xl mb-6 leading-tight">Journey<br><span class="italic text-[#C83030]">so far.</span></h2>
                     <p class="text-[#BDBDBD] text-xl leading-relaxed max-w-sm">
                         A timeline of my education, experiences, and milestones.
                     </p>
                     <!-- Gradient blur to hide elements gracefully as they scroll up into the heading -->
-                    <div class="absolute bottom-[-3rem] left-0 right-0 h-12 bg-gradient-to-b from-[#00001c] to-transparent pointer-events-none"></div>
+                    <div class="absolute bottom-[-3rem] left-0 right-0 h-12 pointer-events-none" style="background: linear-gradient(to bottom, var(--theme-bg-secondary) 0%, transparent 100%);"></div>
                 </div>
 
                 <!-- Timeline (Single Column Layout Below) -->
@@ -293,7 +294,7 @@
                         <!-- Timeline Item 2 -->
                         <div class="mb-20 relative pl-10 md:pl-16 group">
                             <!-- Marker -->
-                            <div class="absolute left-[-4.5px] top-2 w-[10px] h-[10px] bg-[#00001c] border-2 border-[#4A4A4A] rounded-full transition-all duration-300 group-hover:border-[#C83030] group-hover:bg-[#C83030] group-hover:scale-125 group-hover:shadow-[0_0_10px_rgba(200,48,48,0.5)]"></div>
+                            <div class="absolute left-[-4.5px] top-2 w-[10px] h-[10px] theme-bg-secondary border-2 border-[#4A4A4A] rounded-full transition-all duration-300 group-hover:border-[#C83030] group-hover:bg-[#C83030] group-hover:scale-125 group-hover:shadow-[0_0_10px_rgba(200,48,48,0.5)]"></div>
                             
                             <div class="mb-2 text-[#4A4A4A] font-mono text-sm tracking-widest group-hover:text-white/70 transition-colors duration-300">SUMMER 2023</div>
                             <h3 class="font-sans text-2xl md:text-3xl text-white mb-2 tracking-tight group-hover:text-white transition-colors duration-300">Software Engineering Intern</h3>
@@ -306,7 +307,7 @@
                         <!-- Timeline Item 3 -->
                         <div class="mb-20 relative pl-10 md:pl-16 group">
                             <!-- Marker -->
-                            <div class="absolute left-[-4.5px] top-2 w-[10px] h-[10px] bg-[#00001c] border-2 border-[#4A4A4A] rounded-full transition-all duration-300 group-hover:border-[#C83030] group-hover:bg-[#C83030] group-hover:scale-125 group-hover:shadow-[0_0_10px_rgba(200,48,48,0.5)]"></div>
+                            <div class="absolute left-[-4.5px] top-2 w-[10px] h-[10px] theme-bg-secondary border-2 border-[#4A4A4A] rounded-full transition-all duration-300 group-hover:border-[#C83030] group-hover:bg-[#C83030] group-hover:scale-125 group-hover:shadow-[0_0_10px_rgba(200,48,48,0.5)]"></div>
                             
                             <div class="mb-2 text-[#4A4A4A] font-mono text-sm tracking-widest group-hover:text-white/70 transition-colors duration-300">WINTER 2022</div>
                             <h3 class="font-sans text-2xl md:text-3xl text-white mb-2 tracking-tight group-hover:text-white transition-colors duration-300">Open Source Contributor</h3>
@@ -319,7 +320,7 @@
                         <!-- Timeline Item 4 -->
                         <div class="mb-8 relative pl-10 md:pl-16 group">
                             <!-- Marker -->
-                            <div class="absolute left-[-4.5px] top-2 w-[10px] h-[10px] bg-[#00001c] border-2 border-[#4A4A4A] rounded-full transition-all duration-300 group-hover:border-[#C83030] group-hover:bg-[#C83030] group-hover:scale-125 group-hover:shadow-[0_0_10px_rgba(200,48,48,0.5)]"></div>
+                            <div class="absolute left-[-4.5px] top-2 w-[10px] h-[10px] theme-bg-secondary border-2 border-[#4A4A4A] rounded-full transition-all duration-300 group-hover:border-[#C83030] group-hover:bg-[#C83030] group-hover:scale-125 group-hover:shadow-[0_0_10px_rgba(200,48,48,0.5)]"></div>
                             
                             <div class="mb-2 text-[#4A4A4A] font-mono text-sm tracking-widest group-hover:text-white/70 transition-colors duration-300">EARLY 2022</div>
                             <h3 class="font-sans text-2xl md:text-3xl text-white mb-2 tracking-tight group-hover:text-white transition-colors duration-300">First Lines of Code</h3>
@@ -334,7 +335,7 @@
             </section>
         </div>
 
-        <section id="connect" class="pl-8 pr-8 md:pl-64 lg:pl-80 relative z-10 min-h-[80vh] pt-24 pb-8 flex flex-col justify-between" style="background: linear-gradient(to bottom, #00001c 0%, #000000 100%);">
+        <section id="connect" class="pl-8 pr-8 md:pl-64 lg:pl-80 relative z-10 min-h-[80vh] pt-24 pb-8 flex flex-col justify-between theme-bg-gradient-reverse">
             <div>
                 <h2 class="font-serif text-5xl sm:text-7xl md:text-[6rem] mb-12 tracking-tight">Let's build<br><span class="text-[#C83030] italic">something.</span></h2>
                     

@@ -24,6 +24,7 @@ export default async function HomePage() {
   return (
     <>
       <div className={bodyInfo.className} dangerouslySetInnerHTML={{ __html: bodyInfo.content }} />
+      <Script src="/js/light-sky-pattern.js" strategy="afterInteractive" />
       <Script src="/js/home-interactions.js" strategy="afterInteractive" />
     </>
   );

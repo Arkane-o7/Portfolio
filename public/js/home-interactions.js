@@ -1,50 +1,21 @@
-function initHomeInteractions() {
-  // --- Navigation Scroll Tracking ---
-  const navBtns = document.querySelectorAll('.nav-btn');
-  const sections = Array.from(navBtns).map((btn) =>
-    document.getElementById(btn.dataset.target)
-  );
+function resolveTheme() {
+  return document.documentElement.getAttribute('data-theme') === 'light'
+    ? 'light'
+    : 'dark';
+}
 
-  function handleScroll() {
-    const scrollPosition = window.scrollY + window.innerHeight / 3;
-    let activeId = 'home';
+function createNoopEngine() {
+  return {
+    start() {},
+    stop() {},
+  };
+}
 
-    for (let i = sections.length - 1; i >= 0; i--) {
-      const section = sections[i];
-      if (section && section.offsetTop <= scrollPosition) {
-        activeId = section.id;
-        break;
-      }
-    }
-
-    navBtns.forEach((btn) => {
-      if (btn.dataset.target === activeId) {
-        btn.className =
-          'nav-btn text-lg md:text-xl transition-all duration-300 text-[#C83030] font-medium border-b border-[#C83030]';
-      } else {
-        btn.className =
-          'nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent';
-      }
-    });
-  }
-
-  navBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const targetId = btn.dataset.target;
-      const element = document.getElementById(targetId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-  });
-
-  window.addEventListener('scroll', handleScroll);
-  handleScroll();
-
-  // --- Ascii Galaxy Canvas Logic ---
-  const canvas = document.getElementById('galaxyCanvas');
-  if (!canvas) return;
+function createDarkGalaxyEngine(canvas) {
   const ctx = canvas.getContext('2d');
+  if (!ctx) {
+    return createNoopEngine();
+  }
 
   const NUM_PARTICLES = 65000;
   const CHARS = '  .·-~*:;=!+#$@';
@@ -57,9 +28,15 @@ function initHomeInteractions() {
   const CRT_OFFSET_Y = 0.4;
   const BRIGHTNESS_BOOST = 2.0;
 
-  let width, height;
-  let cols, rows, gridLength;
-  let gridDensity, gridR, gridG, gridB;
+  let width = 0;
+  let height = 0;
+  let cols = 0;
+  let rows = 0;
+  let gridLength = 0;
+  let gridDensity = new Float32Array(0);
+  let gridR = new Float32Array(0);
+  let gridG = new Float32Array(0);
+  let gridB = new Float32Array(0);
   let particles = [];
 
   let spin = 0;
@@ -76,7 +53,22 @@ function initHomeInteractions() {
   let isDragging = false;
   let lastMouseX = 0;
   let lastMouseY = 0;
-  let animationFrameId;
+  let animationFrameId = null;
+  let running = false;
+
+  const listenerCleanup = [];
+
+  const addListener = (target, type, handler, options) => {
+    target.addEventListener(type, handler, options);
+    listenerCleanup.push(() => target.removeEventListener(type, handler, options));
+  };
+
+  const removeAllListeners = () => {
+    while (listenerCleanup.length) {
+      const cleanup = listenerCleanup.pop();
+      cleanup();
+    }
+  };
 
   const lerp = (start, end, t) => start + (end - start) * t;
 
@@ -154,7 +146,7 @@ function initHomeInteractions() {
   };
 
   const resize = () => {
-    if (!canvas || !canvas.parentElement) return;
+    if (!canvas.parentElement) return;
     width = canvas.parentElement.clientWidth;
     height = canvas.parentElement.clientHeight;
     canvas.width = width;
@@ -174,6 +166,8 @@ function initHomeInteractions() {
   };
 
   const animate = () => {
+    if (!running) return;
+
     time += 0.01;
     spin -= 0.0015;
 
@@ -282,11 +276,21 @@ function initHomeInteractions() {
         if (charIdx > 3) {
           const bgAlpha = Math.min(0.12, weight * 0.012);
           ctx.fillStyle = `rgba(${r}, 0, 0, ${bgAlpha})`;
-          ctx.fillRect(px - CRT_OFFSET_X, py - CRT_OFFSET_Y, CELL_WIDTH, CELL_HEIGHT);
+          ctx.fillRect(
+            px - CRT_OFFSET_X,
+            py - CRT_OFFSET_Y,
+            CELL_WIDTH,
+            CELL_HEIGHT
+          );
           ctx.fillStyle = `rgba(0, ${g}, 0, ${bgAlpha})`;
           ctx.fillRect(px, py, CELL_WIDTH, CELL_HEIGHT);
           ctx.fillStyle = `rgba(0, 0, ${b}, ${bgAlpha})`;
-          ctx.fillRect(px + CRT_OFFSET_X, py + CRT_OFFSET_Y, CELL_WIDTH, CELL_HEIGHT);
+          ctx.fillRect(
+            px + CRT_OFFSET_X,
+            py + CRT_OFFSET_Y,
+            CELL_WIDTH,
+            CELL_HEIGHT
+          );
         }
 
         if (charIdx > charLen) charIdx = charLen;
@@ -305,67 +309,300 @@ function initHomeInteractions() {
     animationFrameId = requestAnimationFrame(animate);
   };
 
-  const handleMouseDown = (e) => {
+  const handleMouseDown = (event) => {
     isDragging = true;
     autoDrift = false;
-    lastMouseX = e.clientX;
-    lastMouseY = e.clientY;
+    lastMouseX = event.clientX;
+    lastMouseY = event.clientY;
+    canvas.style.cursor = 'grabbing';
   };
 
-  const handleMouseMove = (e) => {
-    if (isDragging) {
-      const dx = e.clientX - lastMouseX;
-      const dy = e.clientY - lastMouseY;
-      targetYaw += dx * 0.005;
-      targetPitch += dy * 0.005;
-      lastMouseX = e.clientX;
-      lastMouseY = e.clientY;
-    }
+  const handleMouseMove = (event) => {
+    if (!isDragging) return;
+
+    const dx = event.clientX - lastMouseX;
+    const dy = event.clientY - lastMouseY;
+    targetYaw += dx * 0.005;
+    targetPitch += dy * 0.005;
+    lastMouseX = event.clientX;
+    lastMouseY = event.clientY;
   };
 
   const handleMouseUp = () => {
     isDragging = false;
+    canvas.style.cursor = 'grab';
   };
 
-  const handleTouchStart = (e) => {
+  const handleTouchStart = (event) => {
     isDragging = true;
     autoDrift = false;
-    lastMouseX = e.touches[0].clientX;
-    lastMouseY = e.touches[0].clientY;
+    lastMouseX = event.touches[0].clientX;
+    lastMouseY = event.touches[0].clientY;
+    canvas.style.cursor = 'grabbing';
   };
 
-  const handleTouchMove = (e) => {
-    if (isDragging) {
-      const dx = e.touches[0].clientX - lastMouseX;
-      const dy = e.touches[0].clientY - lastMouseY;
-      targetYaw += dx * 0.006;
-      targetPitch += dy * 0.006;
-      lastMouseX = e.touches[0].clientX;
-      lastMouseY = e.touches[0].clientY;
+  const handleTouchMove = (event) => {
+    if (!isDragging) return;
+
+    const dx = event.touches[0].clientX - lastMouseX;
+    const dy = event.touches[0].clientY - lastMouseY;
+    targetYaw += dx * 0.006;
+    targetPitch += dy * 0.006;
+    lastMouseX = event.touches[0].clientX;
+    lastMouseY = event.touches[0].clientY;
+  };
+
+  const start = () => {
+    if (running) return;
+
+    running = true;
+    spin = 0;
+    targetPitch = 0.7939;
+    pitch = 0.7939;
+    targetYaw = 0.693;
+    yaw = 0.693;
+    targetZoom = 4.0;
+    zoom = 100.0;
+    autoDrift = false;
+    time = 0;
+    isDragging = false;
+    canvas.style.cursor = 'grab';
+
+    initParticles();
+    resize();
+    animate();
+
+    addListener(window, 'resize', resize);
+    addListener(window, 'mousemove', handleMouseMove);
+    addListener(window, 'mouseup', handleMouseUp);
+    addListener(window, 'touchmove', handleTouchMove, { passive: true });
+    addListener(window, 'touchend', handleMouseUp);
+
+    addListener(canvas, 'mousedown', handleMouseDown);
+    addListener(canvas, 'touchstart', handleTouchStart, { passive: true });
+  };
+
+  const stop = () => {
+    if (!running) return;
+
+    running = false;
+    if (animationFrameId) {
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = null;
+    }
+
+    removeAllListeners();
+    isDragging = false;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  };
+
+  return { start, stop };
+}
+
+function createLightSkyEngine(canvas) {
+  const container = canvas.parentElement;
+  if (!container) {
+    return createNoopEngine();
+  }
+
+  const speed = 24;
+  let skyLayer = null;
+  let skyPre = null;
+  let animationFrameId = null;
+  let running = false;
+  let offset = 0;
+  let lastTime = 0;
+
+  const ensureLayer = () => {
+    if (skyLayer && skyPre) return;
+
+    skyLayer = document.createElement('div');
+    skyLayer.setAttribute('data-light-sky-layer', 'true');
+    skyLayer.style.position = 'absolute';
+    skyLayer.style.inset = '0';
+    skyLayer.style.zIndex = '2';
+    skyLayer.style.pointerEvents = 'none';
+    skyLayer.style.overflow = 'hidden';
+    skyLayer.style.display = 'none';
+    skyLayer.style.alignItems = 'flex-end';
+    skyLayer.style.justifyContent = 'flex-start';
+    skyLayer.style.opacity = '0';
+    skyLayer.style.transition = 'opacity 220ms ease';
+
+    skyPre = document.createElement('pre');
+    skyPre.setAttribute('data-light-sky-pre', 'true');
+    skyPre.style.margin = '0';
+    skyPre.style.padding = '0';
+    skyPre.style.whiteSpace = 'pre';
+    skyPre.style.fontFamily = '"Courier New", Courier, monospace';
+    skyPre.style.fontWeight = '700';
+    skyPre.style.fontSize = '1.4vh';
+    skyPre.style.lineHeight = '0.9';
+    skyPre.style.letterSpacing = '-0.05em';
+    skyPre.style.userSelect = 'none';
+    skyPre.style.transform = 'translate3d(0,0,0)';
+
+    skyLayer.appendChild(skyPre);
+    container.appendChild(skyLayer);
+  };
+
+  const getConfig = () => window.__LIGHT_SKY_CONFIG;
+
+  const render = () => {
+    const config = getConfig();
+    if (!config || !skyPre) return;
+    skyPre.innerHTML = config.generateHtmlForOffset(offset);
+  };
+
+  const loop = (time) => {
+    if (!running) return;
+
+    const config = getConfig();
+    if (!config) {
+      animationFrameId = requestAnimationFrame(loop);
+      return;
+    }
+
+    const fpsInterval = 1000 / speed;
+    const deltaTime = time - lastTime;
+
+    if (deltaTime >= fpsInterval) {
+      lastTime = time - (deltaTime % fpsInterval);
+      offset = (offset + 1) % config.TARGET_LENGTH;
+      render();
+    }
+
+    animationFrameId = requestAnimationFrame(loop);
+  };
+
+  const start = () => {
+    if (running) return;
+    ensureLayer();
+
+    running = true;
+    if (skyLayer) {
+      skyLayer.style.display = 'flex';
+      skyLayer.style.opacity = '1';
+    }
+
+    const config = getConfig();
+    if (config && skyPre && !skyPre.innerHTML) {
+      render();
+    }
+
+    lastTime = performance.now();
+    animationFrameId = requestAnimationFrame(loop);
+  };
+
+  const stop = () => {
+    if (!running) return;
+
+    running = false;
+    if (animationFrameId) {
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = null;
+    }
+
+    if (skyLayer) {
+      skyLayer.style.opacity = '0';
+      skyLayer.style.display = 'none';
     }
   };
 
-  const handleWheel = () => {
-    // Zoom intentionally locked.
+  return { start, stop };
+}
+
+function initHomeInteractions() {
+  // --- Navigation Scroll Tracking ---
+  const navBtns = document.querySelectorAll('.nav-btn');
+  const sections = Array.from(navBtns).map((btn) =>
+    document.getElementById(btn.dataset.target)
+  );
+
+  function handleScroll() {
+    const scrollPosition = window.scrollY + window.innerHeight / 3;
+    let activeId = 'home';
+
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const section = sections[i];
+      if (section && section.offsetTop <= scrollPosition) {
+        activeId = section.id;
+        break;
+      }
+    }
+
+    navBtns.forEach((btn) => {
+      if (btn.dataset.target === activeId) {
+        btn.className =
+          'nav-btn text-lg md:text-xl transition-all duration-300 text-[#C83030] font-medium border-b border-[#C83030]';
+      } else {
+        btn.className =
+          'nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent';
+      }
+    });
+  }
+
+  navBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.dataset.target;
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  window.addEventListener('scroll', handleScroll);
+  handleScroll();
+
+  // --- Theme-Aware Hero Animation Engines ---
+  const canvas = document.getElementById('galaxyCanvas');
+  if (!canvas) return;
+
+  const darkEngine = createDarkGalaxyEngine(canvas);
+  const lightEngine = createLightSkyEngine(canvas);
+  let activeEngine = null;
+
+  const applyCanvasPresentation = (theme) => {
+    if (theme === 'dark') {
+      canvas.style.display = 'block';
+      canvas.style.filter = 'blur(0.3px) contrast(1.1)';
+      canvas.style.cursor = 'grab';
+    } else {
+      canvas.style.display = 'none';
+      canvas.style.filter = 'none';
+      canvas.style.cursor = 'default';
+    }
   };
 
-  initParticles();
-  resize();
-  animate();
+  const switchEngine = (theme) => {
+    const normalizedTheme = theme === 'light' ? 'light' : 'dark';
+    const nextEngine = normalizedTheme === 'light' ? lightEngine : darkEngine;
 
-  window.addEventListener('resize', resize);
-  window.addEventListener('mousemove', handleMouseMove);
-  window.addEventListener('mouseup', handleMouseUp);
-  window.addEventListener('touchmove', handleTouchMove, { passive: true });
-  window.addEventListener('touchend', handleMouseUp);
+    if (activeEngine === nextEngine) return;
 
-  canvas.addEventListener('mousedown', handleMouseDown);
-  canvas.addEventListener('touchstart', handleTouchStart, { passive: true });
-  canvas.addEventListener('wheel', handleWheel, { passive: true });
+    if (activeEngine) {
+      activeEngine.stop();
+    }
+
+    applyCanvasPresentation(normalizedTheme);
+    activeEngine = nextEngine;
+    activeEngine.start();
+  };
+
+  switchEngine(resolveTheme());
+
+  const handleThemeChange = (event) => {
+    const requestedTheme = event?.detail?.theme;
+    switchEngine(requestedTheme === 'light' ? 'light' : resolveTheme());
+  };
+
+  window.addEventListener('themechange', handleThemeChange);
 
   window.addEventListener('beforeunload', () => {
-    if (animationFrameId) {
-      cancelAnimationFrame(animationFrameId);
+    window.removeEventListener('themechange', handleThemeChange);
+    if (activeEngine) {
+      activeEngine.stop();
     }
   });
 }
