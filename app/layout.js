@@ -272,6 +272,13 @@ export default function RootLayout({ children }) {
             color: #C83030 !important;
           }
 
+          html[data-theme='light'] #connect button[aria-label='Back to top'],
+          html[data-theme='light'] #connect button[aria-label='Back to top'] svg,
+          html[data-theme='light'] #connect button[aria-label='Back to top'] svg path {
+            color: #ffffff !important;
+            stroke: #ffffff !important;
+          }
+
           html[data-theme='light'] .article-content p {
             color: var(--theme-text-secondary) !important;
           }
@@ -296,6 +303,12 @@ export default function RootLayout({ children }) {
 
           html[data-theme='light'] #canvas-container canvas {
             filter: none !important;
+          }
+
+          #heroFigureImage {
+            width: 100vw !important;
+            max-width: 100vw !important;
+            height: auto !important;
           }
 
           .theme-bg-primary {

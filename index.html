@@ -78,7 +78,8 @@
             <!-- Image (Bottom Right) -->
             <!-- z-[5] layers it above the background canvas (z-0) but below the text (z-10) -->
             <img 
-                src="DF49E32F-A3AB-4B5F-8C65-874A6BAD811F_4_5005_c-removebg-preview.png" 
+                id="heroFigureImage"
+                src="/hero-dark.png" 
                 alt="Abhilaksh Chauhan" 
                 class="absolute bottom-0 right-0 w-full md:w-[100%] lg:w-[95%] max-w-[1200px] h-auto z-[5] pointer-events-none opacity-100"
             >
@@ -128,45 +129,45 @@
                     </div>
 
                     <!-- Polaroids Grid Side -->
-                    <div class="w-full max-w-[480px] grid grid-cols-2 gap-6 relative mt-12 xl:mt-4 p-4 shrink-0 xl:mr-32 2xl:mr-48">
+                    <div class="w-full max-w-[560px] grid grid-cols-2 gap-x-10 gap-y-14 relative mt-12 xl:mt-4 p-6 shrink-0 xl:mr-32 2xl:mr-48">
                         <!-- Polaroid 1 -->
-                        <div class="bg-[#f6f6f6] p-3 pb-8 sm:p-4 sm:pb-14 shadow-[0_15px_30px_rgba(0,0,0,0.8)] transform -rotate-6 hover:rotate-0 hover:scale-[1.15] hover:z-50 transition-all duration-300 z-10 translate-y-4 flex flex-col">
+                        <div class="bg-[#f6f6f6] p-3 pb-8 sm:p-4 sm:pb-14 shadow-[0_15px_30px_rgba(0,0,0,0.8)] transform -rotate-6 hover:rotate-0 hover:scale-[1.08] hover:z-50 transition-all duration-300 z-10 translate-y-2 flex flex-col">
                             <div class="aspect-square bg-gray-800 w-full overflow-hidden">
                                 <!-- Replace src with your image -->
-                                <img src="" alt="" class="w-full h-full object-cover">
+                                <img src="/about/polaroid-1.jpeg" alt="Me" class="w-full h-full object-cover">
                             </div>
                             <div class="mt-4 text-center">
-                                <span class="font-hand text-2xl text-[#1a1a1a] opacity-80 decoration-slice">Coffee runs!</span>
+                                <span class="font-hand text-2xl text-[#1a1a1a] opacity-80 decoration-slice">Me!!</span>
                             </div>
                         </div>
                         <!-- Polaroid 2 -->
-                        <div class="bg-[#f6f6f6] p-3 pb-8 sm:p-4 sm:pb-14 shadow-[0_15px_30px_rgba(0,0,0,0.8)] transform rotate-4 hover:rotate-0 hover:scale-[1.15] hover:z-50 transition-all duration-300 z-20 translate-y-16 flex flex-col">
+                        <div class="bg-[#f6f6f6] p-3 pb-8 sm:p-4 sm:pb-14 shadow-[0_15px_30px_rgba(0,0,0,0.8)] transform rotate-4 hover:rotate-0 hover:scale-[1.08] hover:z-50 transition-all duration-300 z-20 translate-y-14 flex flex-col">
                             <div class="aspect-square bg-gray-700 w-full overflow-hidden">
                                 <!-- Replace src with your image -->
-                                <img src="" alt="" class="w-full h-full object-cover">
+                                <img src="/about/polaroid-2.jpeg" alt="Hackathon '25" class="w-full h-full object-cover">
                             </div>
                             <div class="mt-4 text-center">
                                 <span class="font-hand text-2xl text-[#1a1a1a] opacity-80 decoration-slice">Hackathon '25</span>
                             </div>
                         </div>
                         <!-- Polaroid 3 -->
-                        <div class="bg-[#f6f6f6] p-3 pb-8 sm:p-4 sm:pb-14 shadow-[0_15px_30px_rgba(0,0,0,0.8)] transform -rotate-2 hover:rotate-0 hover:scale-[1.15] hover:z-50 transition-all duration-300 z-30 -translate-y-4 flex flex-col">
+                        <div class="bg-[#f6f6f6] p-3 pb-8 sm:p-4 sm:pb-14 shadow-[0_15px_30px_rgba(0,0,0,0.8)] transform -rotate-2 hover:rotate-0 hover:scale-[1.08] hover:z-50 transition-all duration-300 z-30 -translate-y-2 flex flex-col">
                             <div class="aspect-square bg-gray-600 w-full overflow-hidden">
                                 <!-- Replace src with your image -->
-                                <img src="" alt="" class="w-full h-full object-cover">
+                                <img src="/about/polaroid-3.png" alt="My Uni" class="w-full h-full object-cover">
                             </div>
                             <div class="mt-4 text-center">
-                                <span class="font-hand text-2xl text-[#1a1a1a] opacity-80 decoration-slice">VIT sunset</span>
+                                <span class="font-hand text-2xl text-[#1a1a1a] opacity-80 decoration-slice">My Uni</span>
                             </div>
                         </div>
                         <!-- Polaroid 4 -->
-                        <div class="bg-[#f6f6f6] p-3 pb-8 sm:p-4 sm:pb-14 shadow-[0_15px_30px_rgba(0,0,0,0.8)] transform rotate-6 hover:rotate-0 hover:scale-[1.15] hover:z-50 transition-all duration-300 z-40 translate-y-6 flex flex-col">
+                        <div class="bg-[#f6f6f6] p-3 pb-8 sm:p-4 sm:pb-14 shadow-[0_15px_30px_rgba(0,0,0,0.8)] transform rotate-6 hover:rotate-0 hover:scale-[1.08] hover:z-50 transition-all duration-300 z-40 translate-y-8 flex flex-col">
                             <div class="aspect-square bg-gray-900 w-full overflow-hidden">
                                 <!-- Replace src with your image -->
-                                <img src="" alt="" class="w-full h-full object-cover">
+                                <img src="/about/polaroid-4.jpeg" alt="Also Me" class="w-full h-full object-cover">
                             </div>
                             <div class="mt-4 text-center">
-                                <span class="font-hand text-2xl text-[#1a1a1a] opacity-80 decoration-slice">Code & sleep</span>
+                                <span class="font-hand text-2xl text-[#1a1a1a] opacity-80 decoration-slice">Also Me :)</span>
                             </div>
                         </div>
                     </div>
@@ -189,20 +190,20 @@
                         <!-- Project Card 1 -->
                         <div class="group relative block w-full outline-none transition-transform duration-500 hover:scale-[1.02]">
                             <div class="relative w-full aspect-[16/9] bg-[#11112b] rounded-[2rem] overflow-hidden border border-[#4A4A4A]/20 mb-8 shadow-2xl transition-all duration-700">
-                                <!-- Placeholder Image Area -->
-                                <div class="absolute inset-0 bg-gradient-to-br from-[#0a0a1a] to-[#00001c] opacity-80 backdrop-blur-sm flex items-center justify-center font-mono text-[#4A4A4A]">IMAGE REF</div>
+                                <div class="absolute inset-0 bg-gradient-to-br from-[#0a0a1a] to-[#00001c] opacity-80 backdrop-blur-sm flex items-center justify-center font-mono text-[#C83030] text-sm tracking-[0.3em]">NAVI</div>
                             </div>
                             <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 px-2">
                                 <div>
-                                    <h3 class="font-sans text-3xl md:text-4xl text-white mb-3 tracking-tight group-hover:text-[#C83030] transition-colors duration-300">Project Alpha</h3>
-                                    <p class="text-[#BDBDBD] text-lg max-w-xl">A complete overhaul of a legacy backend system, increasing throughput by 400% using Rust and Redis.</p>
+                                    <h3 class="font-sans text-3xl md:text-4xl text-white mb-3 tracking-tight group-hover:text-[#C83030] transition-colors duration-300">Navi — AI Assistant Embedded in your OS</h3>
+                                    <p class="text-[#BDBDBD] text-lg max-w-xl">Built a low-latency desktop AI assistant with an Electron summon UI, custom agentic model orchestration, and full-stack API/backend integration.</p>
                                     <div class="flex flex-wrap gap-3 mt-6">
-                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Rust</span>
-                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Redis</span>
-                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">System Design</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">TypeScript</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Electron</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Agentic AI</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Text-to-Speech</span>
                                     </div>
                                 </div>
-                                <div class="mt-auto inline-flex items-center justify-center w-12 h-12 rounded-full border border-[#4A4A4A]/30 text-white group-hover:bg-[#FF1F1F] group-hover:border-[#FF1F1F] group-hover:shadow-[0_0_20px_rgba(255,31,31,0.4)] transition-all duration-300">
+                                <div class="mt-auto inline-flex shrink-0 aspect-square items-center justify-center w-12 h-12 rounded-full border border-[#4A4A4A]/30 text-white group-hover:bg-[#FF1F1F] group-hover:border-[#FF1F1F] group-hover:shadow-[0_0_20px_rgba(255,31,31,0.4)] transition-all duration-300">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transform -rotate-45">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                                     </svg>
@@ -213,20 +214,20 @@
                         <!-- Project Card 2 -->
                         <div class="group relative block w-full outline-none transition-transform duration-500 hover:scale-[1.02]">
                             <div class="relative w-full aspect-[16/9] bg-[#11112b] rounded-[2rem] overflow-hidden border border-[#4A4A4A]/20 mb-8 shadow-2xl transition-all duration-700">
-                                <!-- Placeholder Image Area -->
-                                <div class="absolute inset-0 bg-gradient-to-tl from-[#0a0a1a] to-[#00001c] opacity-80 backdrop-blur-sm flex items-center justify-center font-mono text-[#4A4A4A]">IMAGE REF</div>
+                                <div class="absolute inset-0 bg-gradient-to-tl from-[#0a0a1a] to-[#00001c] opacity-80 backdrop-blur-sm flex items-center justify-center font-mono text-[#C83030] text-sm tracking-[0.3em]">AUTOKATHA</div>
                             </div>
                             <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 px-2">
                                 <div>
-                                    <h3 class="font-sans text-3xl md:text-4xl text-white mb-3 tracking-tight group-hover:text-[#C83030] transition-colors duration-300">E-Commerce Platform</h3>
-                                    <p class="text-[#BDBDBD] text-lg max-w-xl">A highly scalable headless commerce solution combining Next.js with a custom Node.js microservices architecture.</p>
+                                    <h3 class="font-sans text-3xl md:text-4xl text-white mb-3 tracking-tight group-hover:text-[#C83030] transition-colors duration-300">AutoKatha — AI Story &amp; Book to Video Generator</h3>
+                                    <p class="text-[#BDBDBD] text-lg max-w-xl">Developed an end-to-end AI pipeline that transforms stories and long-form books into narrated scene-by-scene videos with visual consistency and multilingual voice support.</p>
                                     <div class="flex flex-wrap gap-3 mt-6">
-                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Next.js</span>
-                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Node.js</span>
-                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">PostgreSQL</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Python</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Gradio</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">ComfyUI</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">SDXL</span>
                                     </div>
                                 </div>
-                                <div class="mt-auto inline-flex items-center justify-center w-12 h-12 rounded-full border border-[#4A4A4A]/30 text-white group-hover:bg-[#FF1F1F] group-hover:border-[#FF1F1F] group-hover:shadow-[0_0_20px_rgba(255,31,31,0.4)] transition-all duration-300">
+                                <div class="mt-auto inline-flex shrink-0 aspect-square items-center justify-center w-12 h-12 rounded-full border border-[#4A4A4A]/30 text-white group-hover:bg-[#FF1F1F] group-hover:border-[#FF1F1F] group-hover:shadow-[0_0_20px_rgba(255,31,31,0.4)] transition-all duration-300">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transform -rotate-45">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                                     </svg>
@@ -237,20 +238,68 @@
                         <!-- Project Card 3 -->
                         <div class="group relative block w-full outline-none transition-transform duration-500 hover:scale-[1.02]">
                             <div class="relative w-full aspect-[16/9] bg-[#11112b] rounded-[2rem] overflow-hidden border border-[#4A4A4A]/20 mb-8 shadow-2xl transition-all duration-700">
-                                <!-- Placeholder Image Area -->
-                                <div class="absolute inset-0 bg-gradient-to-tr from-[#0a0a1a] to-[#00001c] opacity-80 backdrop-blur-sm flex items-center justify-center font-mono text-[#4A4A4A]">IMAGE REF</div>
+                                <div class="absolute inset-0 bg-gradient-to-tr from-[#0a0a1a] to-[#00001c] opacity-80 backdrop-blur-sm flex items-center justify-center font-mono text-[#C83030] text-sm tracking-[0.3em]">AIR CONTROLLER</div>
                             </div>
                             <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 px-2">
                                 <div>
-                                    <h3 class="font-sans text-3xl md:text-4xl text-white mb-3 tracking-tight group-hover:text-[#C83030] transition-colors duration-300">Interactive WebGL App</h3>
-                                    <p class="text-[#BDBDBD] text-lg max-w-xl">An immersive data visualization tool built directly in browser using Three.js and raw WebGL shaders.</p>
+                                    <h3 class="font-sans text-3xl md:text-4xl text-white mb-3 tracking-tight group-hover:text-[#C83030] transition-colors duration-300">Air-Controller — Phone-to-Controller System</h3>
+                                    <p class="text-[#BDBDBD] text-lg max-w-xl">Created a cross-platform setup that turns Android phones into wireless virtual gamepads for PC, with real-time Socket.io communication and Xbox emulation support.</p>
                                     <div class="flex flex-wrap gap-3 mt-6">
-                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Three.js</span>
-                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">WebGL</span>
-                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">GLSL</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">JavaScript</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Node.js</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Socket.io</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">ViGEmClient</span>
                                     </div>
                                 </div>
-                                <div class="mt-auto inline-flex items-center justify-center w-12 h-12 rounded-full border border-[#4A4A4A]/30 text-white group-hover:bg-[#FF1F1F] group-hover:border-[#FF1F1F] group-hover:shadow-[0_0_20px_rgba(255,31,31,0.4)] transition-all duration-300">
+                                <div class="mt-auto inline-flex shrink-0 aspect-square items-center justify-center w-12 h-12 rounded-full border border-[#4A4A4A]/30 text-white group-hover:bg-[#FF1F1F] group-hover:border-[#FF1F1F] group-hover:shadow-[0_0_20px_rgba(255,31,31,0.4)] transition-all duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transform -rotate-45">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Card 4 -->
+                        <div class="group relative block w-full outline-none transition-transform duration-500 hover:scale-[1.02]">
+                            <div class="relative w-full aspect-[16/9] bg-[#11112b] rounded-[2rem] overflow-hidden border border-[#4A4A4A]/20 mb-8 shadow-2xl transition-all duration-700">
+                                <div class="absolute inset-0 bg-gradient-to-br from-[#0a0a1a] to-[#00001c] opacity-80 backdrop-blur-sm flex items-center justify-center font-mono text-[#C83030] text-sm tracking-[0.3em]">CLUTCHCHESS</div>
+                            </div>
+                            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 px-2">
+                                <div>
+                                    <h3 class="font-sans text-3xl md:text-4xl text-white mb-3 tracking-tight group-hover:text-[#C83030] transition-colors duration-300">Distributed Systems &amp; Networking (ClutchChess)</h3>
+                                    <p class="text-[#BDBDBD] text-lg max-w-xl">Built a real-time multiplayer chess system over WebSockets for low-latency state sync, plus networking-focused local communication experiments for wireless control.</p>
+                                    <div class="flex flex-wrap gap-3 mt-6">
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Python</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">WebSockets</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Distributed Systems</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Networking</span>
+                                    </div>
+                                </div>
+                                <div class="mt-auto inline-flex shrink-0 aspect-square items-center justify-center w-12 h-12 rounded-full border border-[#4A4A4A]/30 text-white group-hover:bg-[#FF1F1F] group-hover:border-[#FF1F1F] group-hover:shadow-[0_0_20px_rgba(255,31,31,0.4)] transition-all duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transform -rotate-45">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Card 5 -->
+                        <div class="group relative block w-full outline-none transition-transform duration-500 hover:scale-[1.02]">
+                            <div class="relative w-full aspect-[16/9] bg-[#11112b] rounded-[2rem] overflow-hidden border border-[#4A4A4A]/20 mb-8 shadow-2xl transition-all duration-700">
+                                <div class="absolute inset-0 bg-gradient-to-tl from-[#0a0a1a] to-[#00001c] opacity-80 backdrop-blur-sm flex items-center justify-center font-mono text-[#C83030] text-sm tracking-[0.3em]">CODEMONKEY</div>
+                            </div>
+                            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 px-2">
+                                <div>
+                                    <h3 class="font-sans text-3xl md:text-4xl text-white mb-3 tracking-tight group-hover:text-[#C83030] transition-colors duration-300">CodeMonkey — Voice Web Assistant Extension</h3>
+                                    <p class="text-[#BDBDBD] text-lg max-w-xl">Built an AI-powered browser extension that understands natural language voice commands and automates browser actions like clicking, typing, and scrolling with privacy-first local speech handling.</p>
+                                    <div class="flex flex-wrap gap-3 mt-6">
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">JavaScript</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Chrome Extensions</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Gemini AI</span>
+                                        <span class="text-xs font-mono text-[#C83030] bg-[#C83030]/10 uppercase tracking-wider px-4 py-1.5 rounded-full">Web Speech API</span>
+                                    </div>
+                                </div>
+                                <div class="mt-auto inline-flex shrink-0 aspect-square items-center justify-center w-12 h-12 rounded-full border border-[#4A4A4A]/30 text-white group-hover:bg-[#FF1F1F] group-hover:border-[#FF1F1F] group-hover:shadow-[0_0_20px_rgba(255,31,31,0.4)] transition-all duration-300">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transform -rotate-45">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                                     </svg>

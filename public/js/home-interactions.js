@@ -400,58 +400,126 @@ function createDarkGalaxyEngine(canvas) {
 }
 
 function createLightSkyEngine(canvas) {
-  const container = canvas.parentElement;
-  if (!container) {
+  const ctx = canvas.getContext('2d');
+  if (!ctx) {
     return createNoopEngine();
   }
 
-  const speed = 24;
-  let skyLayer = null;
-  let skyPre = null;
+  const FPS = 24;
+  const SCROLL_STEP = 0.5;
+  const MOBILE_FONT_SIZE = 8;
+  const DESKTOP_FONT_SIZE = 10;
+  const CHAR_ASPECT_RATIO = 0.62;
+  const LINE_HEIGHT_RATIO = 0.92;
+
+  let width = 0;
+  let height = 0;
+  let dpr = 1;
+  let cols = 0;
+  let rows = 0;
+  let fontSize = 0;
+  let cellWidth = 0;
+  let cellHeight = 0;
+
   let animationFrameId = null;
   let running = false;
   let offset = 0;
+  let scrollPhase = 0;
+  let frame = 0;
   let lastTime = 0;
 
-  const ensureLayer = () => {
-    if (skyLayer && skyPre) return;
+  const listenerCleanup = [];
 
-    skyLayer = document.createElement('div');
-    skyLayer.setAttribute('data-light-sky-layer', 'true');
-    skyLayer.style.position = 'absolute';
-    skyLayer.style.inset = '0';
-    skyLayer.style.zIndex = '2';
-    skyLayer.style.pointerEvents = 'none';
-    skyLayer.style.overflow = 'hidden';
-    skyLayer.style.display = 'none';
-    skyLayer.style.alignItems = 'flex-end';
-    skyLayer.style.justifyContent = 'flex-start';
-    skyLayer.style.opacity = '0';
-    skyLayer.style.transition = 'opacity 220ms ease';
+  const addListener = (target, type, handler, options) => {
+    target.addEventListener(type, handler, options);
+    listenerCleanup.push(() => target.removeEventListener(type, handler, options));
+  };
 
-    skyPre = document.createElement('pre');
-    skyPre.setAttribute('data-light-sky-pre', 'true');
-    skyPre.style.margin = '0';
-    skyPre.style.padding = '0';
-    skyPre.style.whiteSpace = 'pre';
-    skyPre.style.fontFamily = '"Courier New", Courier, monospace';
-    skyPre.style.fontWeight = '700';
-    skyPre.style.fontSize = '1.4vh';
-    skyPre.style.lineHeight = '0.9';
-    skyPre.style.letterSpacing = '-0.05em';
-    skyPre.style.userSelect = 'none';
-    skyPre.style.transform = 'translate3d(0,0,0)';
-
-    skyLayer.appendChild(skyPre);
-    container.appendChild(skyLayer);
+  const removeAllListeners = () => {
+    while (listenerCleanup.length) {
+      const cleanup = listenerCleanup.pop();
+      cleanup();
+    }
   };
 
   const getConfig = () => window.__LIGHT_SKY_CONFIG;
 
-  const render = () => {
+  const resize = () => {
+    if (!canvas.parentElement) return;
+
+    width = canvas.parentElement.clientWidth;
+    height = canvas.parentElement.clientHeight;
+
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.max(1, Math.floor(width * dpr));
+    canvas.height = Math.max(1, Math.floor(height * dpr));
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    fontSize = width < 768 ? MOBILE_FONT_SIZE : DESKTOP_FONT_SIZE;
+    cellWidth = fontSize * CHAR_ASPECT_RATIO;
+    cellHeight = fontSize * LINE_HEIGHT_RATIO;
+
+    cols = Math.max(1, Math.ceil(width / cellWidth));
+    rows = Math.max(1, Math.ceil(height / cellHeight));
+
+    ctx.textBaseline = 'top';
+    ctx.textAlign = 'left';
+    ctx.font = `700 ${fontSize}px "Courier New", Courier, monospace`;
+  };
+
+  const draw = () => {
     const config = getConfig();
-    if (!config || !skyPre) return;
-    skyPre.innerHTML = config.generateHtmlForOffset(offset);
+    if (!config || !width || !height) return;
+
+    const sourceRows = config.rows || 0;
+    const sourceCols = config.cols || config.TARGET_LENGTH || 0;
+    if (!sourceRows || !sourceCols) return;
+
+    const contentStart = config.contentStartRow ?? 0;
+    const contentRows = Math.max(1, config.contentRowCount || sourceRows);
+    const windowStart = contentRows > rows ? Math.floor((contentRows - rows) / 2) : 0;
+
+    ctx.clearRect(0, 0, width, height);
+
+    const haze = ctx.createLinearGradient(0, 0, 0, height);
+    haze.addColorStop(0, 'rgba(56, 189, 248, 0.14)');
+    haze.addColorStop(0.6, 'rgba(125, 211, 252, 0.07)');
+    haze.addColorStop(1, 'rgba(255, 255, 255, 0)');
+    ctx.fillStyle = haze;
+    ctx.fillRect(0, 0, width, height);
+
+    for (let y = 0; y < rows; y++) {
+      const py = y * cellHeight;
+      const sourceY =
+        contentRows > rows
+          ? contentStart + windowStart + y
+          : contentStart + (y % contentRows);
+
+      for (let x = 0; x < cols; x++) {
+        const sourceX = (x + offset) % sourceCols;
+        const char = config.getCell(sourceY, sourceX);
+        const intensity = config.getIntensity(char);
+        const px = x * cellWidth;
+
+        if (intensity <= 0.02 || char === ' ') {
+          const fallbackChar = (x + y + frame) % 6 < 2 ? ':' : '-';
+          const ambientAlpha = (x * 17 + y * 11 + frame * 3) % 9 === 0 ? 0.09 : 0.045;
+          ctx.globalAlpha = ambientAlpha;
+          ctx.fillStyle = config.getColor(fallbackChar);
+          ctx.fillText(fallbackChar, px, py);
+          continue;
+        }
+
+        const twinkle = 0.82 + 0.18 * Math.sin(frame * 0.12 + x * 0.09 + y * 0.07);
+        ctx.globalAlpha = Math.min(1, Math.max(0.08, intensity * twinkle));
+        ctx.fillStyle = config.getColor(char);
+        ctx.fillText(char, px, py);
+      }
+    }
+
+    ctx.globalAlpha = 1;
   };
 
   const loop = (time) => {
@@ -463,13 +531,16 @@ function createLightSkyEngine(canvas) {
       return;
     }
 
-    const fpsInterval = 1000 / speed;
+    const fpsInterval = 1000 / FPS;
     const deltaTime = time - lastTime;
 
     if (deltaTime >= fpsInterval) {
       lastTime = time - (deltaTime % fpsInterval);
-      offset = (offset + 1) % config.TARGET_LENGTH;
-      render();
+      const cycle = config.cols || config.TARGET_LENGTH || 1;
+      scrollPhase = (scrollPhase + SCROLL_STEP) % cycle;
+      offset = Math.floor(scrollPhase);
+      frame += 1;
+      draw();
     }
 
     animationFrameId = requestAnimationFrame(loop);
@@ -477,18 +548,20 @@ function createLightSkyEngine(canvas) {
 
   const start = () => {
     if (running) return;
-    ensureLayer();
+
+    const legacyLayer = canvas.parentElement?.querySelector('[data-light-sky-layer]');
+    if (legacyLayer) {
+      legacyLayer.remove();
+    }
 
     running = true;
-    if (skyLayer) {
-      skyLayer.style.display = 'flex';
-      skyLayer.style.opacity = '1';
-    }
+    offset = 0;
+    scrollPhase = 0;
+    frame = 0;
 
-    const config = getConfig();
-    if (config && skyPre && !skyPre.innerHTML) {
-      render();
-    }
+    resize();
+    draw();
+    addListener(window, 'resize', resize);
 
     lastTime = performance.now();
     animationFrameId = requestAnimationFrame(loop);
@@ -503,16 +576,17 @@ function createLightSkyEngine(canvas) {
       animationFrameId = null;
     }
 
-    if (skyLayer) {
-      skyLayer.style.opacity = '0';
-      skyLayer.style.display = 'none';
-    }
+    removeAllListeners();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
   };
 
   return { start, stop };
 }
 
 function initHomeInteractions() {
+  const DARK_HERO_IMAGE_SRC = '/hero-dark.png';
+  const LIGHT_HERO_IMAGE_SRC = '/hero-light.png';
+
   // --- Navigation Scroll Tracking ---
   const navBtns = document.querySelectorAll('.nav-btn');
   const sections = Array.from(navBtns).map((btn) =>
@@ -557,6 +631,13 @@ function initHomeInteractions() {
 
   // --- Theme-Aware Hero Animation Engines ---
   const canvas = document.getElementById('galaxyCanvas');
+  const heroFigureImage = document.getElementById('heroFigureImage');
+
+  const applyHeroImageForTheme = (theme) => {
+    if (!heroFigureImage) return;
+    heroFigureImage.src = theme === 'light' ? LIGHT_HERO_IMAGE_SRC : DARK_HERO_IMAGE_SRC;
+  };
+
   if (!canvas) return;
 
   const darkEngine = createDarkGalaxyEngine(canvas);
@@ -567,10 +648,12 @@ function initHomeInteractions() {
     if (theme === 'dark') {
       canvas.style.display = 'block';
       canvas.style.filter = 'blur(0.3px) contrast(1.1)';
+      canvas.style.imageRendering = 'auto';
       canvas.style.cursor = 'grab';
     } else {
-      canvas.style.display = 'none';
+      canvas.style.display = 'block';
       canvas.style.filter = 'none';
+      canvas.style.imageRendering = 'auto';
       canvas.style.cursor = 'default';
     }
   };
@@ -586,6 +669,7 @@ function initHomeInteractions() {
     }
 
     applyCanvasPresentation(normalizedTheme);
+    applyHeroImageForTheme(normalizedTheme);
     activeEngine = nextEngine;
     activeEngine.start();
   };

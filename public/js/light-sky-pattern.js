@@ -103,6 +103,73 @@
     ' ': 'color: transparent;',
   };
 
+  const charIntensityMap = {
+    '@': 1.0,
+    '%': 0.92,
+    '#': 0.82,
+    '*': 0.68,
+    '+': 0.56,
+    '-': 0.42,
+    ':': 0.3,
+    '=': 0,
+    '.': 0,
+    ';': 0,
+    ' ': 0,
+  };
+
+  const charColorMap = {
+    '@': '#ffffff',
+    '%': '#f0f9ff',
+    '#': '#bae6fd',
+    '*': '#7dd3fc',
+    '+': '#38bdf8',
+    '-': '#0ea5e9',
+    ':': '#0369a1',
+  };
+
+  const normalizeIndex = (value, size) => {
+    const mod = value % size;
+    return mod < 0 ? mod + size : mod;
+  };
+
+  const getCell = (row, col) => {
+    if (!normalizedSky.length || TARGET_LENGTH <= 0) return ' ';
+    const rowIndex = normalizeIndex(row, normalizedSky.length);
+    const colIndex = normalizeIndex(col, TARGET_LENGTH);
+    return normalizedSky[rowIndex][colIndex] || ' ';
+  };
+
+  const getIntensity = (char) => charIntensityMap[char] ?? 0.5;
+  const getColor = (char) => charColorMap[char] || '#38bdf8';
+
+  const rowHasVisibleGlyph = (row) => {
+    for (let i = 0; i < row.length; i++) {
+      if ((charIntensityMap[row[i]] ?? 0) > 0.02) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  let contentStartRow = 0;
+  let contentEndRow = Math.max(0, normalizedSky.length - 1);
+
+  while (
+    contentStartRow < normalizedSky.length - 1 &&
+    !rowHasVisibleGlyph(normalizedSky[contentStartRow])
+  ) {
+    contentStartRow += 1;
+  }
+
+  while (
+    contentEndRow > contentStartRow &&
+    !rowHasVisibleGlyph(normalizedSky[contentEndRow])
+  ) {
+    contentEndRow -= 1;
+  }
+
+  const contentRowCount = Math.max(1, contentEndRow - contentStartRow + 1);
+
   const generateHtmlForOffset = (offset) => {
     let html = '';
 
@@ -129,6 +196,14 @@
 
   window.__LIGHT_SKY_CONFIG = {
     TARGET_LENGTH,
+    rows: normalizedSky.length,
+    cols: TARGET_LENGTH,
+    contentStartRow,
+    contentEndRow,
+    contentRowCount,
+    getCell,
+    getIntensity,
+    getColor,
     generateHtmlForOffset,
   };
 })();
