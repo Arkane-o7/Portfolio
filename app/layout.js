@@ -234,8 +234,11 @@ export default function RootLayout({ children }) {
           }
 
           html[data-theme='light'] .blog-card-shell {
-            background-color: rgba(226, 232, 240, 0.62) !important;
-            border-color: rgba(100, 116, 139, 0.26) !important;
+            background-color: rgba(255, 255, 255, 0.84) !important;
+            border-color: rgba(71, 85, 105, 0.16) !important;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05), 0 1px 4px rgba(15, 23, 42, 0.03) !important;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
           }
 
           html[data-theme='light'] .blog-card-media {
@@ -258,8 +261,13 @@ export default function RootLayout({ children }) {
           }
 
           html[data-theme='light'] .blog-card-title,
+          html[data-theme='light'] .group:focus-within .blog-card-title {
+            color: #0f172a !important;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+          }
+
           html[data-theme='light'] .group:hover .blog-card-title {
-            color: #ffffff !important;
+            color: #C83030 !important;
           }
 
           html[data-theme='light'] #connect h3,
@@ -279,8 +287,13 @@ export default function RootLayout({ children }) {
             stroke: #ffffff !important;
           }
 
-          html[data-theme='light'] .article-content p {
-            color: var(--theme-text-secondary) !important;
+          html[data-theme='light'] .article-content p,
+          html[data-theme='light'] .article-content ul,
+          html[data-theme='light'] .article-content ol,
+          html[data-theme='light'] .article-content li,
+          html[data-theme='light'] .article-content figcaption,
+          html[data-theme='light'] .article-content small {
+            color: #0f172a !important;
           }
 
           html[data-theme='light'] .article-content h1,
