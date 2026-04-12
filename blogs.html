@@ -37,12 +37,12 @@
     <div class="fixed inset-0 z-0 theme-bg-gradient-main pointer-events-none"></div>
 
     <!-- Navigation -->
-    <nav class="fixed bottom-8 left-8 md:bottom-12 md:left-12 z-50 flex flex-col items-start gap-1" id="nav-menu">
-        <a href="index.html" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Home</a>
-        <a href="index.html#about" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">About me</a>
-        <a href="index.html#works" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Projects</a>
-        <a href="blogs.html" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#C83030] font-medium border-b border-[#C83030]">Blogs</a>
-        <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Resume <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block w-4 h-4 ml-1 align-[-0.1em] transform -rotate-45"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></a>
+    <nav class="fixed bottom-8 left-8 md:bottom-12 md:left-12 z-50 flex flex-col items-start gap-1" id="nav-menu" data-nav-menu data-mobile-open="true">
+        <a href="/" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Home</a>
+        <a href="/#about" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">About me</a>
+        <a href="/#works" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Projects</a>
+        <a href="/blogs" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#C83030] font-medium border-b border-[#C83030]">Blogs</a>
+        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Resume <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block w-4 h-4 ml-1 align-[-0.1em] transform -rotate-45"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></a>
         <button type="button" data-theme-toggle aria-label="Switch theme" class="theme-toggle-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent inline-flex items-center gap-2">
             <span data-theme-toggle-label>Dark mode</span>
             <span data-theme-toggle-icon data-theme-icon-state="dark" aria-hidden="true" class="inline-flex items-center">
@@ -52,6 +52,22 @@
             </span>
         </button>
     </nav>
+
+    <button
+        type="button"
+        class="mobile-nav-toggle"
+        data-mobile-nav-toggle
+        data-nav-target="nav-menu"
+        aria-controls="nav-menu"
+        aria-expanded="false"
+        aria-label="Open navigation menu"
+    >
+        <span class="mobile-nav-toggle-icon" aria-hidden="true">
+            <span class="mobile-nav-toggle-line"></span>
+            <span class="mobile-nav-toggle-line"></span>
+            <span class="mobile-nav-toggle-line"></span>
+        </span>
+    </button>
 
     <main class="relative z-10 max-w-7xl mx-auto px-6 sm:px-12 pt-16 md:pt-32 flex flex-col gap-24">
         
@@ -66,7 +82,7 @@
         </header>
 
         <!-- Articles Grid List -->
-        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 w-full">
+        <section class="flex flex-col gap-8 md:gap-10 w-full">
             
             <!-- Article 1 -->
             <article class="group relative flex flex-col w-full outline-none transition-transform duration-500 hover:scale-[1.02]">

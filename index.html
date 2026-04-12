@@ -50,11 +50,11 @@
 <body class="min-h-screen text-white font-sans relative selection:bg-[#C83030] selection:text-white">
 
     <!-- Navigation -->
-    <nav class="fixed bottom-8 left-8 md:bottom-12 md:left-12 z-50 flex flex-col items-start gap-1" id="nav-menu">
+    <nav class="fixed bottom-8 left-8 md:bottom-12 md:left-12 z-50 flex flex-col items-start gap-1" id="nav-menu" data-nav-menu data-mobile-open="true">
         <a href="/" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#C83030] font-medium border-b border-[#C83030]">Home</a>
         <a href="/#about" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent" data-target="about">About me</a>
         <a href="/#works" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent" data-target="works">Projects</a>
-        <a href="blogs.html" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Blogs</a>
+        <a href="/blogs" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Blogs</a>
         <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Resume <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block w-4 h-4 ml-1 align-[-0.1em] transform -rotate-45"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></a>
         <button type="button" data-theme-toggle aria-label="Switch theme" class="theme-toggle-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent inline-flex items-center gap-2">
             <span data-theme-toggle-label>Dark mode</span>
@@ -66,11 +66,27 @@
         </button>
     </nav>
 
+    <button
+        type="button"
+        class="mobile-nav-toggle"
+        data-mobile-nav-toggle
+        data-nav-target="nav-menu"
+        aria-controls="nav-menu"
+        aria-expanded="false"
+        aria-label="Open navigation menu"
+    >
+        <span class="mobile-nav-toggle-icon" aria-hidden="true">
+            <span class="mobile-nav-toggle-line"></span>
+            <span class="mobile-nav-toggle-line"></span>
+            <span class="mobile-nav-toggle-line"></span>
+        </span>
+    </button>
+
     <!-- MAIN CONTENT WRAPPER -->
     <main>
         
         <!-- HERO SECTION -->
-        <section id="home" class="relative min-h-screen flex flex-col justify-center px-8 md:px-12 pt-32 pb-16 overflow-hidden">
+        <section id="home" class="relative min-h-screen flex flex-col justify-center px-5 sm:px-8 md:px-10 lg:px-12 pt-28 sm:pt-32 pb-16 overflow-x-clip overflow-y-hidden">
             
             <!-- Ascii Galaxy Background -->
             <div class="absolute inset-0 z-0 overflow-hidden theme-bg-gradient-main" id="canvas-container">
@@ -93,12 +109,12 @@
 
             <!-- Foreground Content -->
             <div class="relative z-10 pointer-events-none">
-                <p class="text-[#C83030] font-sans text-lg md:text-xl mb-4 font-medium tracking-wide pointer-events-auto w-max">
+                <p class="text-[#C83030] font-sans text-lg md:text-xl mb-4 font-medium tracking-wide pointer-events-auto w-fit max-w-full">
                     Hey there! im
                 </p>
                 
-                <div class="relative inline-block w-max max-w-full pointer-events-auto">
-                    <h1 class="font-serif text-[4rem] leading-[0.95] sm:text-[5rem] md:text-[6.5rem] lg:text-[8rem] tracking-tight text-[#FFFFFF]">
+                <div class="relative inline-block w-fit max-w-full pointer-events-auto">
+                    <h1 class="font-serif text-[clamp(3rem,11vw,8rem)] leading-[0.95] tracking-tight text-[#FFFFFF]">
                         Abhilaksh<br>Chauhan
                     </h1>
                     
@@ -113,14 +129,14 @@
                     </div>
                 </div>
 
-                <p class="text-[#BDBDBD] font-sans mt-4 md:mt-6 text-base md:text-lg font-light pl-2 pointer-events-auto w-max">
+                <p class="text-[#BDBDBD] font-sans mt-4 md:mt-6 text-base md:text-lg font-light pl-2 pointer-events-auto w-fit max-w-full">
                     CS Student and Software Engineer
                 </p>
             </div>
         </section>
 
         <!-- SECTIONS -->
-        <div class="pl-8 pr-8 md:pl-64 lg:pl-80 relative z-10 theme-bg-secondary">
+        <div class="pl-5 pr-5 sm:pl-8 sm:pr-8 md:pl-28 md:pr-10 lg:pl-44 lg:pr-16 xl:pl-56 xl:pr-24 2xl:pl-72 2xl:pr-32 relative z-10 theme-bg-secondary">
             
             <section id="about" class="min-h-screen pt-48 md:pt-64 pb-24 flex flex-col justify-center">
                 <div class="flex flex-col xl:flex-row gap-16 xl:items-center justify-between">
@@ -136,45 +152,45 @@
                     </div>
 
                     <!-- Polaroids Grid Side -->
-                    <div class="w-full max-w-[560px] grid grid-cols-2 gap-x-10 gap-y-14 relative mt-12 xl:mt-4 p-6 shrink-0 xl:mr-32 2xl:mr-48">
+                    <div class="w-full max-w-[560px] grid grid-cols-2 gap-x-4 gap-y-6 sm:gap-x-10 sm:gap-y-14 relative mt-10 sm:mt-12 xl:mt-4 p-2 sm:p-6 shrink-0 xl:mr-24 2xl:mr-36">
                         <!-- Polaroid 1 -->
-                        <div class="bg-[#f6f6f6] p-3 pb-8 sm:p-4 sm:pb-14 shadow-[0_15px_30px_rgba(0,0,0,0.8)] transform -rotate-6 hover:rotate-0 hover:scale-[1.08] hover:z-50 transition-all duration-300 z-10 translate-y-2 flex flex-col">
+                        <div class="bg-[#f6f6f6] p-2.5 pb-6 sm:p-4 sm:pb-14 shadow-[0_15px_30px_rgba(0,0,0,0.8)] transform -rotate-6 hover:rotate-0 hover:scale-[1.08] hover:z-50 transition-all duration-300 z-10 translate-y-2 flex flex-col">
                             <div class="aspect-square bg-gray-800 w-full overflow-hidden">
                                 <!-- Replace src with your image -->
                                 <img src="/about/polaroid-1.jpeg" alt="Me" class="w-full h-full object-cover">
                             </div>
                             <div class="mt-4 text-center">
-                                <span class="font-hand text-2xl text-[#1a1a1a] opacity-80 decoration-slice">Me!!</span>
+                                <span class="font-hand text-lg sm:text-2xl text-[#1a1a1a] opacity-80 decoration-slice">Me!!</span>
                             </div>
                         </div>
                         <!-- Polaroid 2 -->
-                        <div class="bg-[#f6f6f6] p-3 pb-8 sm:p-4 sm:pb-14 shadow-[0_15px_30px_rgba(0,0,0,0.8)] transform rotate-4 hover:rotate-0 hover:scale-[1.08] hover:z-50 transition-all duration-300 z-20 translate-y-14 flex flex-col">
+                        <div class="bg-[#f6f6f6] p-2.5 pb-6 sm:p-4 sm:pb-14 shadow-[0_15px_30px_rgba(0,0,0,0.8)] transform rotate-4 hover:rotate-0 hover:scale-[1.08] hover:z-50 transition-all duration-300 z-20 translate-y-14 flex flex-col">
                             <div class="aspect-square bg-gray-700 w-full overflow-hidden">
                                 <!-- Replace src with your image -->
                                 <img src="/about/polaroid-2.jpeg" alt="Hackathon '25" class="w-full h-full object-cover">
                             </div>
                             <div class="mt-4 text-center">
-                                <span class="font-hand text-2xl text-[#1a1a1a] opacity-80 decoration-slice">Hackathon '25</span>
+                                <span class="font-hand text-lg sm:text-2xl text-[#1a1a1a] opacity-80 decoration-slice">Hackathon '25</span>
                             </div>
                         </div>
                         <!-- Polaroid 3 -->
-                        <div class="bg-[#f6f6f6] p-3 pb-8 sm:p-4 sm:pb-14 shadow-[0_15px_30px_rgba(0,0,0,0.8)] transform -rotate-2 hover:rotate-0 hover:scale-[1.08] hover:z-50 transition-all duration-300 z-30 -translate-y-2 flex flex-col">
+                        <div class="bg-[#f6f6f6] p-2.5 pb-6 sm:p-4 sm:pb-14 shadow-[0_15px_30px_rgba(0,0,0,0.8)] transform -rotate-2 hover:rotate-0 hover:scale-[1.08] hover:z-50 transition-all duration-300 z-30 -translate-y-2 flex flex-col">
                             <div class="aspect-square bg-gray-600 w-full overflow-hidden">
                                 <!-- Replace src with your image -->
                                 <img src="/about/polaroid-3.png" alt="My Uni" class="w-full h-full object-cover">
                             </div>
                             <div class="mt-4 text-center">
-                                <span class="font-hand text-2xl text-[#1a1a1a] opacity-80 decoration-slice">My Uni</span>
+                                <span class="font-hand text-lg sm:text-2xl text-[#1a1a1a] opacity-80 decoration-slice">My Uni</span>
                             </div>
                         </div>
                         <!-- Polaroid 4 -->
-                        <div class="bg-[#f6f6f6] p-3 pb-8 sm:p-4 sm:pb-14 shadow-[0_15px_30px_rgba(0,0,0,0.8)] transform rotate-6 hover:rotate-0 hover:scale-[1.08] hover:z-50 transition-all duration-300 z-40 translate-y-8 flex flex-col">
+                        <div class="bg-[#f6f6f6] p-2.5 pb-6 sm:p-4 sm:pb-14 shadow-[0_15px_30px_rgba(0,0,0,0.8)] transform rotate-6 hover:rotate-0 hover:scale-[1.08] hover:z-50 transition-all duration-300 z-40 translate-y-8 flex flex-col">
                             <div class="aspect-square bg-gray-900 w-full overflow-hidden">
                                 <!-- Replace src with your image -->
                                 <img src="/about/polaroid-4.jpeg" alt="Also Me" class="w-full h-full object-cover">
                             </div>
                             <div class="mt-4 text-center">
-                                <span class="font-hand text-2xl text-[#1a1a1a] opacity-80 decoration-slice">Also Me :)</span>
+                                <span class="font-hand text-lg sm:text-2xl text-[#1a1a1a] opacity-80 decoration-slice">Also Me :)</span>
                             </div>
                         </div>
                     </div>
@@ -192,7 +208,7 @@
                     </div>
 
                     <!-- Right Scrolling Project Cards -->
-                    <div class="lg:w-2/3 flex flex-col gap-16 lg:gap-32 w-full mt-12 lg:mt-0 pr-4 sm:pr-8 md:pr-12 lg:pr-24 xl:pr-40 2xl:pr-56">
+                    <div class="lg:w-2/3 flex flex-col gap-16 lg:gap-32 w-full mt-12 lg:mt-0 pr-1 sm:pr-2 md:pr-6 lg:pr-10 xl:pr-16 2xl:pr-20">
                         
                         <!-- Project Card 1 -->
                         <div class="group relative block w-full outline-none transition-transform duration-500 hover:scale-[1.02]">
@@ -358,7 +374,7 @@
             </section>
         </div>
 
-        <section id="connect" class="pl-8 pr-8 md:pl-64 lg:pl-80 relative z-10 min-h-[80vh] pt-24 pb-8 flex flex-col justify-between theme-bg-gradient-reverse">
+        <section id="connect" class="pl-5 pr-5 sm:pl-8 sm:pr-8 md:pl-28 md:pr-10 lg:pl-44 lg:pr-16 xl:pl-56 xl:pr-24 2xl:pl-72 2xl:pr-32 relative z-10 min-h-[80vh] pt-24 pb-8 flex flex-col justify-between theme-bg-gradient-reverse">
             <div>
                 <h2 class="font-serif text-5xl sm:text-7xl md:text-[6rem] mb-12 tracking-tight">Let's build<br><span class="text-[#C83030] italic">something.</span></h2>
                     

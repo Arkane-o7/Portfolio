@@ -106,12 +106,12 @@
     <div class="fixed inset-0 z-0 theme-bg-gradient-main pointer-events-none"></div>
 
     <!-- Navigation -->
-    <nav class="fixed bottom-8 left-8 md:bottom-12 md:left-12 z-50 flex flex-col items-start gap-1" id="nav-menu">
-        <a href="index.html" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Home</a>
-        <a href="index.html#about" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">About me</a>
-        <a href="index.html#works" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Projects</a>
-        <a href="blogs.html" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#C83030] font-medium border-b border-[#C83030]">Blogs</a>
-        <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Resume <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block w-4 h-4 ml-1 align-[-0.1em] transform -rotate-45"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></a>
+    <nav class="fixed bottom-8 left-8 md:bottom-12 md:left-12 z-50 flex flex-col items-start gap-1" id="nav-menu" data-nav-menu data-mobile-open="true">
+        <a href="/" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Home</a>
+        <a href="/#about" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">About me</a>
+        <a href="/#works" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Projects</a>
+        <a href="/blogs" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#C83030] font-medium border-b border-[#C83030]">Blogs</a>
+        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">Resume <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block w-4 h-4 ml-1 align-[-0.1em] transform -rotate-45"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></a>
         <button type="button" data-theme-toggle aria-label="Switch theme" class="theme-toggle-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent inline-flex items-center gap-2">
             <span data-theme-toggle-label>Dark mode</span>
             <span data-theme-toggle-icon data-theme-icon-state="dark" aria-hidden="true" class="inline-flex items-center">
@@ -122,10 +122,26 @@
         </button>
     </nav>
 
+    <button
+        type="button"
+        class="mobile-nav-toggle"
+        data-mobile-nav-toggle
+        data-nav-target="nav-menu"
+        aria-controls="nav-menu"
+        aria-expanded="false"
+        aria-label="Open navigation menu"
+    >
+        <span class="mobile-nav-toggle-icon" aria-hidden="true">
+            <span class="mobile-nav-toggle-line"></span>
+            <span class="mobile-nav-toggle-line"></span>
+            <span class="mobile-nav-toggle-line"></span>
+        </span>
+    </button>
+
     <main class="relative z-10 max-w-4xl mx-auto px-6 sm:px-12 pt-16 md:pt-24 flex flex-col gap-12 lg:gap-16 pb-24">
         
         <!-- Back Link -->
-        <a href="blogs.html" class="group inline-flex items-center gap-3 text-[#4A4A4A] hover:text-[#FF1F1F] transition-colors w-max outline-none font-mono text-xs uppercase tracking-widest">
+        <a href="/blogs" class="group inline-flex items-center gap-3 text-[#4A4A4A] hover:text-[#FF1F1F] transition-colors w-max outline-none font-mono text-xs uppercase tracking-widest">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transform transition-transform duration-300">
                 <path d="M19 12H5M12 19l-7-7 7-7"/>
             </svg>
@@ -158,7 +174,7 @@
         </header>
 
         <!-- Hero Image -->
-        <div class="relative w-full aspect-[21/9] bg-[#11112b] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden border border-[#4A4A4A]/30 shadow-2xl">
+        <div class="relative w-full aspect-[16/9] sm:aspect-[21/9] bg-[#11112b] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden border border-[#4A4A4A]/30 shadow-2xl">
             <div class="absolute inset-0 bg-gradient-to-b from-[#0a0a1a]/50 to-[#00001c]/80 flex items-center justify-center">
                 <span class="font-mono text-[#4A4A4A] tracking-widest uppercase text-sm">Hero Image Layout</span>
             </div>

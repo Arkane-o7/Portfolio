@@ -12,7 +12,12 @@ export default async function BlogsPage() {
     <div className="min-h-screen relative font-sans selection:bg-[#FF1F1F] selection:text-white pb-32">
       <div className="fixed inset-0 z-0 theme-bg-gradient-main pointer-events-none" />
 
-      <nav className="fixed bottom-8 left-8 md:bottom-12 md:left-12 z-50 flex flex-col items-start gap-1" id="nav-menu">
+      <nav
+        className="fixed bottom-8 left-8 md:bottom-12 md:left-12 z-50 flex flex-col items-start gap-1"
+        id="nav-menu"
+        data-nav-menu
+        data-mobile-open="true"
+      >
         <Link href="/" className="nav-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">
           Home
         </Link>
@@ -31,10 +36,36 @@ export default async function BlogsPage() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
           </svg>
         </Link>
-        <button type="button" data-theme-toggle className="theme-toggle-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent">
-          Theme: <span data-theme-toggle-label>Light mode</span>
+        <button
+          type="button"
+          data-theme-toggle
+          aria-label="Switch theme"
+          className="theme-toggle-btn text-lg md:text-xl transition-all duration-300 text-[#BDBDBD] hover:text-white border-b border-transparent inline-flex items-center gap-2"
+        >
+          <span data-theme-toggle-label>Dark mode</span>
+          <span data-theme-toggle-icon data-theme-icon-state="dark" aria-hidden="true" className="inline-flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.75" stroke="currentColor" className="w-4 h-4">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M21 12.79A9 9 0 1 1 11.21 3c0 .18-.01.36-.01.54A7.5 7.5 0 0 0 20.46 12c.18 0 .36-.01.54-.01z" />
+            </svg>
+          </span>
         </button>
       </nav>
+
+      <button
+        type="button"
+        className="mobile-nav-toggle"
+        data-mobile-nav-toggle
+        data-nav-target="nav-menu"
+        aria-controls="nav-menu"
+        aria-expanded="false"
+        aria-label="Open navigation menu"
+      >
+        <span className="mobile-nav-toggle-icon" aria-hidden="true">
+          <span className="mobile-nav-toggle-line" />
+          <span className="mobile-nav-toggle-line" />
+          <span className="mobile-nav-toggle-line" />
+        </span>
+      </button>
 
       <main className="relative z-10 max-w-7xl mx-auto px-6 sm:px-12 pt-16 md:pt-32 flex flex-col gap-24">
         <header className="flex flex-col gap-8 max-w-3xl">

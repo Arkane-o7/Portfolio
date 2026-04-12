@@ -30,6 +30,7 @@ function createDarkGalaxyEngine(canvas) {
 
   let width = 0;
   let height = 0;
+  let dpr = 1;
   let cols = 0;
   let rows = 0;
   let gridLength = 0;
@@ -147,10 +148,16 @@ function createDarkGalaxyEngine(canvas) {
 
   const resize = () => {
     if (!canvas.parentElement) return;
+
     width = canvas.parentElement.clientWidth;
     height = canvas.parentElement.clientHeight;
-    canvas.width = width;
-    canvas.height = height;
+
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.max(1, Math.floor(width * dpr));
+    canvas.height = Math.max(1, Math.floor(height * dpr));
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     cols = Math.ceil(width / CELL_WIDTH);
     rows = Math.ceil(height / CELL_HEIGHT);
@@ -373,6 +380,9 @@ function createDarkGalaxyEngine(canvas) {
     animate();
 
     addListener(window, 'resize', resize);
+    if (window.visualViewport) {
+      addListener(window.visualViewport, 'resize', resize);
+    }
     addListener(window, 'mousemove', handleMouseMove);
     addListener(window, 'mouseup', handleMouseUp);
     addListener(window, 'touchmove', handleTouchMove, { passive: true });
