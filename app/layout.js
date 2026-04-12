@@ -63,6 +63,8 @@ export default function RootLayout({ children }) {
             const storageKey = 'theme';
             const DARK = 'dark';
             const LIGHT = 'light';
+            const MOON_ICON = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1 1 11.21 3c0 .18-.01.36-.01.54A7.5 7.5 0 0 0 20.46 12c.18 0 .36-.01.54-.01z" /></svg>';
+            const SUN_ICON = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" class="w-4 h-4"><circle cx="12" cy="12" r="4.5" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 1.75v2.25m0 16v2.25m10.25-10.25H20m-16 0H1.75m16.36 7.46-1.6-1.6M7.49 7.49 5.9 5.9m12.21 0-1.6 1.6M7.49 16.51l-1.6 1.6" /></svg>';
 
             const resolveTheme = () =>
               document.documentElement.getAttribute('data-theme') === LIGHT ? LIGHT : DARK;
@@ -73,11 +75,25 @@ export default function RootLayout({ children }) {
             };
 
             const updateToggleUi = () => {
-              const label = resolveTheme() === DARK ? 'Light mode' : 'Dark mode';
+              const isDark = resolveTheme() === DARK;
+              const label = isDark ? 'Dark mode' : 'Light mode';
+              const iconState = isDark ? DARK : LIGHT;
               document.querySelectorAll('[data-theme-toggle-label]').forEach((el) => {
                 if (el.textContent !== label) {
                   el.textContent = label;
                 }
+              });
+
+              document.querySelectorAll('[data-theme-toggle-icon]').forEach((el) => {
+                if (el.getAttribute('data-theme-icon-state') !== iconState) {
+                  el.innerHTML = isDark ? MOON_ICON : SUN_ICON;
+                  el.setAttribute('data-theme-icon-state', iconState);
+                }
+              });
+
+              document.querySelectorAll('[data-theme-toggle]').forEach((toggle) => {
+                toggle.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
+                toggle.setAttribute('title', isDark ? 'Switch to light theme' : 'Switch to dark theme');
               });
             };
 
