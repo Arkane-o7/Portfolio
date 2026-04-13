@@ -251,9 +251,9 @@ export default function RootLayout({ children }) {
           html[data-theme='light'] {
             --theme-bg-primary: #38bdf8;
             --theme-bg-secondary: #ffffff;
-            --theme-text-primary: #000000;
-            --theme-text-secondary: #000000;
-            --theme-text-muted: #000000;
+            --theme-text-primary: #0b1220;
+            --theme-text-secondary: #111827;
+            --theme-text-muted: #1f2937;
           }
 
           html {
@@ -274,10 +274,24 @@ export default function RootLayout({ children }) {
           html[data-theme='light'] .text-\[\#FFFFFF\],
           html[data-theme='light'] .text-\[\#BDBDBD\],
           html[data-theme='light'] .text-\[\#4A4A4A\] {
-            color: #000000 !important;
+            color: var(--theme-text-primary) !important;
+          }
+
+          html[data-theme='light'] h1,
+          html[data-theme='light'] h2,
+          html[data-theme='light'] h3,
+          html[data-theme='light'] h4,
+          html[data-theme='light'] h5,
+          html[data-theme='light'] h6 {
+            color: var(--theme-text-primary) !important;
           }
 
           html[data-theme='light'] .text-\[\#BDBDBD\] {
+            color: var(--theme-text-secondary) !important;
+          }
+
+          html[data-theme='light'] [class*="text-[#BDBDBD]"],
+          html[data-theme='light'] [class*="text-[#bdbdbd]"] {
             color: var(--theme-text-secondary) !important;
           }
 
@@ -285,12 +299,21 @@ export default function RootLayout({ children }) {
             color: var(--theme-text-muted) !important;
           }
 
+          html[data-theme='light'] [class*="text-[#4A4A4A]"],
+          html[data-theme='light'] [class*="text-[#4a4a4a]"] {
+            color: var(--theme-text-muted) !important;
+          }
+
+          html[data-theme='light'] #about p {
+            color: var(--theme-text-secondary) !important;
+          }
+
           html[data-theme='light'] .hover\:text-white:hover {
             color: var(--theme-text-primary) !important;
           }
 
           html[data-theme='light'] .group:hover .group-hover\:text-white {
-            color: #000000 !important;
+            color: var(--theme-text-primary) !important;
           }
 
           html[data-theme='light'] .text-\[\#C83030\],
@@ -384,6 +407,42 @@ export default function RootLayout({ children }) {
             color: #C83030 !important;
           }
 
+          html[data-theme='light'] #works .project-card-arrow {
+            color: #0f172a !important;
+            border-color: rgba(15, 23, 42, 0.28) !important;
+            background-color: rgba(15, 23, 42, 0.04);
+          }
+
+          html[data-theme='light'] #works .project-card-arrow svg,
+          html[data-theme='light'] #works .project-card-arrow svg path {
+            stroke: currentColor !important;
+          }
+
+          html[data-theme='light'] #works .group:hover .project-card-arrow {
+            color: #ffffff !important;
+            background-color: #FF1F1F !important;
+            border-color: #FF1F1F !important;
+            box-shadow: 0 0 20px rgba(255,31,31,0.35) !important;
+          }
+
+          html[data-theme='light'] .blog-card-arrow {
+            color: #0f172a !important;
+            border-color: rgba(15, 23, 42, 0.28) !important;
+            background-color: rgba(15, 23, 42, 0.04);
+          }
+
+          html[data-theme='light'] .blog-card-arrow svg,
+          html[data-theme='light'] .blog-card-arrow svg path {
+            stroke: currentColor !important;
+          }
+
+          html[data-theme='light'] .group:hover .blog-card-arrow {
+            color: #ffffff !important;
+            background-color: #FF1F1F !important;
+            border-color: #FF1F1F !important;
+            box-shadow: 0 0 20px rgba(255,31,31,0.35) !important;
+          }
+
           html[data-theme='light'] #connect h3,
           html[data-theme='light'] #connect a,
           html[data-theme='light'] #connect p {
@@ -407,7 +466,7 @@ export default function RootLayout({ children }) {
           html[data-theme='light'] .article-content li,
           html[data-theme='light'] .article-content figcaption,
           html[data-theme='light'] .article-content small {
-            color: #0f172a !important;
+            color: #1f2937 !important;
           }
 
           html[data-theme='light'] .article-content h1,
